@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Group
  *
  * @ORM\Table(name="group", uniqueConstraints={@ORM\UniqueConstraint(name="name_UNIQUE", columns={"name"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
  */
 class Group
 {

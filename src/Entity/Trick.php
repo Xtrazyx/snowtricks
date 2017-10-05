@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Traits\FromArrayTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,6 +17,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Trick
 {
+    use FromArrayTrait;
+
     /**
      * @var integer
      *
@@ -52,7 +55,7 @@ class Trick
 
     /**
      * @var ArrayCollection
-     *
+     * @ORM\Column(nullable=true)
      * @ORM\OneToMany(targetEntity="Post", mappedBy="trick")
      */
     private $posts;
