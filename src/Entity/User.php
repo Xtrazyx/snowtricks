@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Traits\FromArrayTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -13,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User
 {
+    use FromArrayTrait;
+
     /**
      * @var integer
      *
@@ -54,7 +57,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=45, nullable=false)
+     * @ORM\Column(name="role", type="string", length=45, nullable=true)
      */
     private $role;
 
