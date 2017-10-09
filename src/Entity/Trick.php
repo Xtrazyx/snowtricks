@@ -56,21 +56,21 @@ class Trick
     /**
      * @var ArrayCollection
      * @ORM\Column(nullable=true)
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="trick", cascade={"remove"})
      */
     private $posts;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="TrickImage", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="TrickImage", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $trickImages;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Video", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $videos;
 

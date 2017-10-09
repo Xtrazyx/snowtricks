@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Traits\FromArrayTrait;
 use App\Upload\Image;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TrickImage extends Image
 {
+    use FromArrayTrait;
+
     /**
      * @var integer
      *

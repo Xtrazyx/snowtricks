@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Traits\FromArrayTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
+    use FromArrayTrait;
+
     /**
      * @var integer
      *
