@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TrickImage
  *
  * @ORM\Table(name="trick_image", indexes={@ORM\Index(name="fk_TrickImage_Trick1_idx", columns={"trick_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TrickImageRepository")
  */
 class TrickImage extends Image
 {
@@ -55,7 +55,6 @@ class TrickImage extends Image
     public function setTrick($trick)
     {
         $this->trick = $trick;
-        $trick->addTrickImage($this);
     }
 
 }

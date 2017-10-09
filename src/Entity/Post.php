@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Post
  *
  * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_Post_User1_idx", columns={"user_id"}), @ORM\Index(name="fk_Post_Trick1_idx", columns={"trick_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  */
 class Post
 {
