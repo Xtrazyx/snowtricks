@@ -8,30 +8,26 @@
 
 namespace App\Tests\Form;
 
-use App\Entity\User;
-use App\Form\RegisterType;
+use App\Entity\TrickImage;
+use App\Form\TrickImageType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class RegisterTypeTest extends TypeTestCase
+class TrickImageTypeTest extends TypeTestCase
 {
     public function testValidFormData()
     {
         $formData = array(
-            'lastName' => 'Jojo',
-            'firstName' => 'l\'asticot',
-            'email' => 'jojo@asticot.fr',
-            'password' => 'robertoJJ666',
-            'avatar' => 'myAvatar.jpg'
+          'fileName' => 'myfile.jpg'
         );
 
-        $form = $this->factory->create(RegisterType::class);
-        $userTest = User::newFromArray($formData);
+        $form = $this->factory->create(TrickImageType::class);
 
         $form->submit($formData);
+        $trickImageTest = TrickImage::newFromArray($formData);
 
         // Testing values through data transformers
         $this->assertTrue($form->isSynchronized());
-        $this->assertEquals($userTest, $form->getData());
+        $this->assertEquals($trickImageTest, $form->getData());
 
         // Testing form elements in view
         $view = $form->createView();

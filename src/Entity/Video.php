@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
+use App\Traits\FromArrayTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Video
  *
  * @ORM\Table(name="video", indexes={@ORM\Index(name="fk_Video_Trick1_idx", columns={"Trick_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  */
 class Video
 {
+    use FromArrayTrait;
+
     /**
      * @var integer
      *

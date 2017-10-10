@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Trick
  *
  * @ORM\Table(name="trick", uniqueConstraints={@ORM\UniqueConstraint(name="name_UNIQUE", columns={"name"})}, indexes={@ORM\Index(name="fk_Trick_Group1_idx", columns={"group_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  * @UniqueEntity("name")
  */
 class Trick
@@ -56,21 +56,21 @@ class Trick
     /**
      * @var ArrayCollection
      * @ORM\Column(nullable=true)
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="trick", cascade={"remove"})
      */
     private $posts;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="TrickImage", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="TrickImage", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $trickImages;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Video", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $videos;
 
@@ -192,6 +192,7 @@ class Trick
     public function addTrickImage(TrickImage $trickImage)
     {
         $this->trickImages->add($trickImage);
+        $trickImage->setTrick($this);
     }
 
     /**

@@ -10,3 +10,4 @@
 ###< symfony/phpunit-bridge ###
 
 /coverage/
+/.idea/

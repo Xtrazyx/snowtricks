@@ -18,6 +18,7 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
+        $this->redirectToRoute('/');
         return $this->render('base.html.twig');
     }
 }

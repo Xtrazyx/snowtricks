@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Avatar
  *
  * @ORM\Table(name="avatar")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AvatarRepository")
  */
 class Avatar extends Image
 {
