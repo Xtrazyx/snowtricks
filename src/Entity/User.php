@@ -64,7 +64,7 @@ class User
     /**
      * @var Avatar
      *
-     * @ORM\OneToOne(targetEntity="Avatar")
+     * @ORM\OneToOne(targetEntity="Avatar", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id")
      */
     private $avatar;
