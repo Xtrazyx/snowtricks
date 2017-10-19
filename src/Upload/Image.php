@@ -14,14 +14,14 @@ abstract class Image
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255, nullable=false)
+     * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
     protected $url;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="alt", type="string", length=255, nullable=false)
+     * @ORM\Column(name="alt", type="string", length=255, nullable=true)
      */
     protected $alt;
 

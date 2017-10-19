@@ -19,7 +19,9 @@ class TrickImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fileName', FileType::class, array('label' => 'Ajouter une image'))
+            ->add('fileName', FileType::class, array(
+                'label' => 'Ajouter une image'
+            ))
         ;
     }
 

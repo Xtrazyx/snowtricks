@@ -17,7 +17,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class FileUploader
 {
-    const UPLOAD_PATH = '../../public/uploads';
+    const UPLOAD_PATH = '../public/uploads';
+    const ASSET_PATH = 'uploads/';
 
     public function upload(UploadedFile $file)
     {

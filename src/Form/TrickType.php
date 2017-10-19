@@ -12,6 +12,7 @@ use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,35 +30,35 @@ class TrickType extends AbstractType
                 'label' => 'Description'
             ))
             ->add('group', ChoiceType::class, array(
-                'label' => 'Groupe'
+                'label' => 'Groupe',
+                'choices' => $options['groups'],
+                'choice_label' => 'name'
             ))
             ->add('trickImages', CollectionType::class, array(
                 'entry_type' => TrickImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'delete_empty' => true,
-                'entry_options' => array(
-                    'label' => 'Ajouter une image',
-                    'empty_data' => NULL
-                )
+                'entry_options' => array('label' => false),
+                'by_reference' => false
             ))
             ->add('videos', CollectionType::class, array(
                 'entry_type' => VideoType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'delete_empty' => true,
-                'entry_options' => array(
-                    'label' => 'Ajouter une vidéo',
-                    'empty_data' => NULL
-                )
+                'entry_options' => array('label' => false),
+                'by_reference' => false
             ))
+            ->add('envoyer', SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Trick::class
+            'data_class' => Trick::class,
+            'groups' => null
         ));
     }
 }

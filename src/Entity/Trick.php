@@ -225,6 +225,7 @@ class Trick
     public function addVideo(Video $video)
     {
         $this->videos->add($video);
+        $video->setTrick($this);
     }
 
     /**
