@@ -10,7 +10,6 @@ namespace App\Manager;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\Form;
 
 class UserManager
 {
@@ -26,9 +25,8 @@ class UserManager
     }
 
     // CREATE
-    public function submit(Form $form)
+    public function persist(User $user)
     {
-        $user = $form->getData();
         $this->em->persist($user);
         $this->em->flush();
     }

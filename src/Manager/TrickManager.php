@@ -26,9 +26,8 @@ class TrickManager
     }
 
     // CREATE
-    public function submit(Form $form)
+    public function persist(Trick $trick)
     {
-        $trick = $form->getData();
         $this->em->persist($trick);
         $this->em->flush();
     }

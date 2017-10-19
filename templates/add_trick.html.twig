@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+  {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+      crossorigin="anonymous">
+  </script>
+  <script
+      src="{{ asset('/js/image_form_adder.js') }}">
+  </script>
+  <script
+      src="{{ asset('/js/video_form_adder.js') }}">
+  </script>
+{% endblock %}

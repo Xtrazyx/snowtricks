@@ -10,7 +10,6 @@ namespace App\Manager;
 
 use App\Entity\Post;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\Form;
 
 class PostManager
 {
@@ -26,9 +25,8 @@ class PostManager
     }
 
     // CREATE
-    public function submit(Form $form)
+    public function persist(Post $post)
     {
-        $post = $form->getData();
         $this->em->persist($post);
         $this->em->flush();
     }

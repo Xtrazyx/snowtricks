@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  <p><a href="{{ path('index') }}">< Retour à la liste</a></p>
+
+  {# FIGURE #}
+  <ul>
+      {# NOM #}
+      <li>{{ trick.name }}</li>
+      <li>{{ trick.group.name }}</li>
+      
+      {# IMAGES #}
+      <ul>
+        {% for image in trick.trickImages %}
+          <li><img src="{{ asset(image.url) }}"></li>
+        {% endfor %}
+      </ul>
+
+      {# VIDEOS #}
+      <div>
+        {% for video in trick.videos %}
+          <div>
+            {# YOUTUBE #}
+            {% if video.sourceId|length == 11 %}
+              <iframe
+                  frameborder="0"
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/{{ video.sourceId }}"
+                  allowfullscreen>
+              </iframe>
+            {# DAILYMOTION #}
+            {% elseif video.sourceId|length == 7 %}
+              <iframe
+                  frameborder="0"
+                  width="560"
+                  height="315"
+                  src="//www.dailymotion.com/embed/video/{{ video.sourceId }}"
+                  allowfullscreen>
+              </iframe>
+            {% else %}
+              <p>L'ID de la vidéo n'a pas le bon format.</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+  </ul>
+
+{% endblock %}
