@@ -40,11 +40,22 @@ class FileUploadListener
         $this->uploadFile($entity);
     }
 
+    public function preRemove(LifecycleEventArgs $args)
+    {
+        $entity = $args->getEntity();
+
+        if(!$entity instanceof Image){
+            return;
+        }
+
+        $this->uploader->delete($entity);
+    }
+
     private function uploadFile($entity)
     {
         // upload only works for Image class inherited entities
         if (!$entity instanceof Image) {
-            return new \Exception('Bad object Type');
+            return;
         }
 
         $file = $entity->getFilename();
@@ -72,9 +83,8 @@ class FileUploadListener
         foreach ($entity->getTrickImages() as $trickImage)
         {
             if ($fileName = $trickImage->getFileName()) {
-                $trickImage->setfileName(new File($this->uploader->getTargetDir().'/'.$fileName));
+                $trickImage->setfileName(new File(FileUploader::UPLOAD_PATH.'/'.$fileName));
             }
         }
-
     }
 }

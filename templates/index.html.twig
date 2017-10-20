@@ -1,6 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
+
+  {# Message Flash #}
+  {% for messages in app.session.flashbag.all %}
+    <div class="alert alert-success">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
   {# LISTE DES FIGURES #}
   <ul>
     {% for trick in tricks %}
@@ -13,6 +23,7 @@
       {# IMAGES #}
       <ul>
         {% for image in trick.trickImages %}
+          <li>{{ image.fileName }}</li>
           <li><img src="{{ asset(image.url) }}"></li>
         {% endfor %}
       </ul>
@@ -23,6 +34,8 @@
           <li>{{ video.sourceId }}</li>
         {% endfor %}
       </ul>
+
+      <li><a href="{{ path('delete_trick', {'id': trick.id}) }}">Supprimer</a></li>
 
     {% endfor %}
   </ul>

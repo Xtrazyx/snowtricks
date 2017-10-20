@@ -24,15 +24,19 @@ class FileUploader
     {
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-        $file->move($this->getTargetDir(), $fileName);
+        $file->move(self::UPLOAD_PATH, $fileName);
 
         return $fileName;
     }
 
-    /**
-     * @return string
-     * @codeCoverageIgnore
-     */
+    public function delete(Image $entity)
+    {
+        if(file_exists($entity->getFilename())){
+            unlink($entity->getFilename());
+            echo $entity->getFilename();
+        }
+    }
+
     public function getTargetDir()
     {
         return self::UPLOAD_PATH;

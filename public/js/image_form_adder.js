@@ -11,11 +11,17 @@ jQuery(document).ready(function() {
     // add the add image to the collection
     $collectionImageHolder.append($newLinkDiv);
 
-    addImageForm($collectionImageHolder, $newLinkDiv);
-
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
     $collectionImageHolder.data('index', $collectionImageHolder.find(':input').length);
+
+    $collectionImageHolder.find('div.img-form').each(function () {
+        addDelImageLink($(this));
+    });
+
+    if($('div.img-form').length === 0){
+        addImageForm($collectionImageHolder, $newLinkDiv);
+    }
 
     $addImageLink.on('click', function(e) {
         // prevent the link from creating a "#" on the URL
@@ -43,6 +49,21 @@ function addImageForm($collectionImageHolder, $newLinkDiv) {
     $collectionImageHolder.data('index', index + 1);
 
     // Display the form in the page in an div, before the "Add a tag" link div
-    var $newFormDiv = $('<div></div>').append(newForm);
+    var $newFormDiv = $('<div class="img-form"></div>').append(newForm);
+    if($('div.img-form').length > 0){
+        addDelImageLink($newFormDiv);
+    }
+
     $newLinkDiv.before($newFormDiv);
+}
+
+function addDelImageLink($form){
+    var $delImageLink = $('<a href="#" class="btn btn-default">Supprimer l\'image</a>');
+    $form.append($delImageLink);
+
+    $delImageLink.on('click', function(e) {
+        e.preventDefault();
+
+        $form.remove();
+    })
 }
