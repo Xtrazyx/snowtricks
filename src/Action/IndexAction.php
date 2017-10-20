@@ -11,20 +11,24 @@ namespace App\Action;
 use App\Manager\TrickManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Twig\Environment;
 
 class IndexAction
 {
     private $twig;
     private $trickManager;
+    private $session;
 
     public function __construct(
         Environment $twig,
-        TrickManager $trickManager
+        TrickManager $trickManager,
+        Session $session
     )
     {
         $this->twig = $twig;
         $this->trickManager = $trickManager;
+        $this->session = $session;
     }
 
     /**
@@ -37,6 +41,10 @@ class IndexAction
         $content = $this->twig->render('index.html.twig', array(
             'tricks' => $tricks
         ));
+
+        $flashBag = $this->session->getFlashBag();
+        $flashBag->get('delete_trick');
+
         return new Response($content);
     }
 }

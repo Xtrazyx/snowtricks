@@ -59,5 +59,6 @@ class TrickManager
     {
         $trick = $this->repo->find($id);
         $this->em->remove($trick);
+        $this->em->flush();
     }
 }

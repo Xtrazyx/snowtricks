@@ -28,8 +28,11 @@ services:
         resource: '../src/Action'
         tags: ['controller.service_arguments']
 
-    # Explicit service declaration
+    # Explicit service configuration
+    # Doctrine Event Listener for Uploaded File management
     App\EventListener\FileUploadListener:
             tags:
                 - { name: doctrine.event_listener, event: prePersist }
                 - { name: doctrine.event_listener, event: preUpdate }
+                - { name: doctrine.event_listener, event: preRemove }
+                - { name: doctrine.event_listener, event: postLoad }
