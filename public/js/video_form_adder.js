@@ -10,19 +10,25 @@ jQuery(document).ready(function() {
 
     // add the add image to the collection
     $collectionVideoHolder.append($newLinkVideoDiv);
-
-    addVideoForm($collectionVideoHolder, $newLinkVideoDiv);
     
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
     $collectionVideoHolder.data('index', $collectionVideoHolder.find(':input').length);
+
+    $collectionVideoHolder.find('div.video-form').each(function () {
+        addDelVideoLink($(this));
+    });
+
+    if($('div.video-form').length === 0){
+        addVideoForm($collectionVideoHolder, $newLinkVideoDiv);
+    }
 
     $addVideoLink.on('click', function(e) {
         // prevent the link from creating a "#" on the URL
         e.preventDefault();
 
         // add a new tag form
-        addImageForm($collectionVideoHolder, $newLinkVideoDiv);
+        addVideoForm($collectionVideoHolder, $newLinkVideoDiv);
     });
 });
 
@@ -43,6 +49,21 @@ function addVideoForm($collectionVideoHolder, $newLinkVideoDiv) {
     $collectionVideoHolder.data('index', index + 1);
 
     // Display the form in the page in an div, before the "Add a tag" link div
-    var $newFormDiv = $('<div></div>').append(newVideoForm);
+    var $newFormDiv = $('<div class="video-form"></div>').append(newVideoForm);
+    if($('div.video-form').length > 0){
+        addDelVideoLink($newFormDiv);
+    }
+
     $newLinkVideoDiv.before($newFormDiv);
+}
+
+function addDelVideoLink($form){
+    var $delVideoLink = $('<a href="#" class="btn btn-default">Supprimer la vidéo</a>');
+    $form.append($delVideoLink);
+
+    $delVideoLink.on('click', function(e) {
+        e.preventDefault();
+
+        $form.remove();
+    })
 }
