@@ -19,6 +19,7 @@
       <li>{{ trick.name }}</li>
       <li>{{ trick.group.name }}</li>
       <li><a href="{{ path('trick', {'id': trick.id}) }}">Voir le détail</a></li>
+      <li><a href="{{ path('edit_trick', {'id': trick.id}) }}">Editer</a> </li>
 
       {# IMAGES #}
       <ul>

@@ -39,7 +39,7 @@ class TrickType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'delete_empty' => true,
-                'entry_options' => array('label' => false),
+                'entry_options' => array('label' => false, 'attr'=>array('class'=>'img-form')),
                 'by_reference' => false
             ))
             ->add('videos', CollectionType::class, array(
@@ -47,7 +47,7 @@ class TrickType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'delete_empty' => true,
-                'entry_options' => array('label' => false),
+                'entry_options' => array('label' => false, 'attr'=>array('class'=>'video-form')),
                 'by_reference' => false
             ))
             ->add('envoyer', SubmitType::class)
