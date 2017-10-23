@@ -15,8 +15,10 @@ jQuery(document).ready(function() {
     // index when inserting a new item (e.g. 2)
     $collectionImageHolder.data('index', $collectionImageHolder.find(':input').length);
 
-    $collectionImageHolder.find('div.img-form').each(function () {
-        addDelImageLink($(this));
+    $collectionImageHolder.find('div.img-form').each(function (index) {
+        if(index > 0){
+            addDelImageLink($(this));
+        }
     });
 
     if($('div.img-form').length === 0){
@@ -49,7 +51,7 @@ function addImageForm($collectionImageHolder, $newLinkDiv) {
     $collectionImageHolder.data('index', index + 1);
 
     // Display the form in the page in an div, before the "Add a tag" link div
-    var $newFormDiv = $('<div class="img-form"></div>').append(newForm);
+    var $newFormDiv = $('<div></div>').append(newForm);
     if($('div.img-form').length > 0){
         addDelImageLink($newFormDiv);
     }

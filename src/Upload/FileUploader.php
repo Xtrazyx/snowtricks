@@ -17,14 +17,20 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class FileUploader
 {
-    const UPLOAD_PATH = '../public/uploads';
     const ASSET_PATH = 'uploads/';
+
+    private $rootDir;
+
+    public function __construct($kernelProjectDir)
+    {
+        $this->rootDir = $kernelProjectDir . '/public/' . self::ASSET_PATH;
+    }
 
     public function upload(UploadedFile $file)
     {
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-        $file->move(self::UPLOAD_PATH, $fileName);
+        $file->move($this->getTargetDir(), $fileName);
 
         return $fileName;
     }
@@ -33,12 +39,11 @@ class FileUploader
     {
         if(file_exists($entity->getFilename())){
             unlink($entity->getFilename());
-            echo $entity->getFilename();
         }
     }
 
     public function getTargetDir()
     {
-        return self::UPLOAD_PATH;
+        return $this->rootDir;
     }
 }

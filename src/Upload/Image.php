@@ -78,6 +78,14 @@ abstract class Image
      */
     public function setFilename($filename)
     {
+        if($this->getFilename() != $filename)
+        {
+            if(file_exists($this->getFilename()))
+            {
+                unlink($this->getFilename());
+            }
+        }
+
         $this->fileName = $filename;
     }
 

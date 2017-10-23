@@ -15,8 +15,10 @@ jQuery(document).ready(function() {
     // index when inserting a new item (e.g. 2)
     $collectionVideoHolder.data('index', $collectionVideoHolder.find(':input').length);
 
-    $collectionVideoHolder.find('div.video-form').each(function () {
-        addDelVideoLink($(this));
+    $collectionVideoHolder.find('div.video-form').each(function (index) {
+        if(index > 0){
+            addDelVideoLink($(this));
+        }
     });
 
     if($('div.video-form').length === 0){
@@ -49,7 +51,7 @@ function addVideoForm($collectionVideoHolder, $newLinkVideoDiv) {
     $collectionVideoHolder.data('index', index + 1);
 
     // Display the form in the page in an div, before the "Add a tag" link div
-    var $newFormDiv = $('<div class="video-form"></div>').append(newVideoForm);
+    var $newFormDiv = $('<div></div>').append(newVideoForm);
     if($('div.video-form').length > 0){
         addDelVideoLink($newFormDiv);
     }

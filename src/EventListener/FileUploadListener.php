@@ -44,7 +44,8 @@ class FileUploadListener
     {
         $entity = $args->getEntity();
 
-        if(!$entity instanceof Image){
+        if(!$entity instanceof Image)
+        {
             return;
         }
 
@@ -63,7 +64,7 @@ class FileUploadListener
         // only upload new files
         if ($file instanceof UploadedFile) {
             $fileName = $this->uploader->upload($file);
-            $entity->setFilename($fileName);
+            $entity->setFilename($this->uploader->getTargetDir() . $fileName);
             $entity->setAlt($fileName);
             $entity->setUrl(FileUploader::ASSET_PATH . $fileName);
         }
@@ -82,8 +83,8 @@ class FileUploadListener
          */
         foreach ($entity->getTrickImages() as $trickImage)
         {
-            if ($fileName = $trickImage->getFileName()) {
-                $trickImage->setfileName(new File(FileUploader::UPLOAD_PATH.'/'.$fileName));
+            if (file_exists($fileName = $trickImage->getFileName())) {
+                $trickImage->setfileName(new File($fileName));
             }
         }
     }
