@@ -21,11 +21,19 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                csrf_token_generator: security.csrf.token_manager
+            logout:
+                path: /logout
+                target: /
+            remember_me:
+                secret: $XCm0Z6LHB5vexrFqwhc
+                lifetime: 604800
+                path: /
+                always_remember_me: true
 
     access_control:
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http, host: snowtricks*$ }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https, host: ^xtrazyx\.fr$ }
-        - { path: ^/edit_trick, roles: ROLE_USER, requires_channel: https, host: ^xtrazyx\.fr$ }
-        - { path: ^/delete_trick, roles: ROLE_USER, requires_channel: https, host: ^xtrazyx\.fr$ }
-        - { path: ^/add_trick, roles: ROLE_USER, requires_channel: https, host: ^xtrazyx\.fr$ }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https, host: ^xtrazyx\.fr$ }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/edit_trick, roles: ROLE_USER }
+        - { path: ^/delete_trick, roles: ROLE_USER }
+        - { path: ^/add_trick, roles: ROLE_USER }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

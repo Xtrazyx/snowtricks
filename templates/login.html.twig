@@ -6,12 +6,16 @@
   {% endif %}
 
   <form action="{{ path('login') }}" method="post">
-    <label for="username">Email:</label>
+    <label for="username">Email</label>
     <input type="text" id="username" name="_username" value="{{ lastUsername }}" />
 
-    <label for="password">Mot de passe:</label>
+    <label for="password">Mot de passe</label>
     <input type="password" id="password" name="_password" />
 
-    <button type="submit">login</button>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <button type="submit">Se connecter</button>
   </form>
 {% endblock %}
