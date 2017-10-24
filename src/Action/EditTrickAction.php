@@ -54,7 +54,10 @@ class EditTrickAction
     {
         $trick = $this->trickManager->getById($id);
         $groups = $this->groupManager->getAll();
-        $form = $this->formFactory->create(TrickType::class, $trick, array('groups' => $groups));
+        $form = $this->formFactory->create(
+            TrickType::class,
+            $trick, array(
+            'groups' => $groups));
 
         $form->handleRequest($this->request);
 
@@ -63,15 +66,16 @@ class EditTrickAction
             $trick = $form->getData();
             $this->trickManager->update();
 
-            return $this->redirectToRoute("trick", array(
+            return $this->redirectToRoute(
+                'trick', array(
                 'id' => $trick->getId()
             ));
         }
 
-        $content = $this->twig->render('edit_trick.html.twig', array(
+        return new Response($this->twig->render(
+            'edit_trick.html.twig', array(
             'form' => $form->createView()
-        ));
-        return new Response($content);
+        )));
     }
 
     public function getRouter()

@@ -58,5 +58,6 @@ class PostManager
     {
         $post = $this->repo->find($id);
         $this->em->remove($post);
+        $this->em->flush();
     }
 }

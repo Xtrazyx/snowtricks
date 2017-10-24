@@ -48,30 +48,33 @@ class AddTrickAction
     }
 
     /**
-     * @Route("/add", name="add_trick")
+     * @Route("/add_trick", name="add_trick")
      */
     public function __invoke()
     {
         $trick = $this->trickManager->new();
         $groups = $this->groupManager->getAll();
-        $form = $this->formFactory->create(TrickType::class, $trick, array('groups' => $groups));
+        $form = $this->formFactory->create(
+            TrickType::class,
+            $trick, array(
+            'groups' => $groups));
 
         $form->handleRequest($this->request);
 
         if($form->isValid() && $form->isSubmitted())
         {
-            $trick = $form->getData();
             $this->trickManager->persist($trick);
 
-            return $this->redirectToRoute("trick", array(
+            return $this->redirectToRoute(
+                "trick", array(
                 'id' => $trick->getId()
             ));
         }
 
-        $content = $this->twig->render('add_trick.html.twig', array(
+        return new Response($this->twig->render(
+            'add_trick.html.twig', array(
             'form' => $form->createView()
-        ));
-        return new Response($content);
+        )));
     }
 
     public function getRouter()
