@@ -14,35 +14,38 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Twig\Environment;
 
+/**
+ * Class IndexAction
+ * @package App\Action
+ *
+ * Show the index page
+ * Load the tricks
+ * Load Authenticated User with ROLE_USER
+ */
 class IndexAction
 {
-    private $twig;
-    private $trickManager;
-    private $session;
 
-    public function __construct(
+    /**
+     * @Route("/", name="index")
+     *
+     * @param Environment $twig
+     * @param TrickManager $trickManager
+     * @param Session $session
+     * @return Response
+     */
+    public function __invoke(
         Environment $twig,
         TrickManager $trickManager,
         Session $session
     )
     {
-        $this->twig = $twig;
-        $this->trickManager = $trickManager;
-        $this->session = $session;
-    }
+        $tricks = $trickManager->getAll();
 
-    /**
-     * @Route("/", name="index")
-     */
-    public function __invoke()
-    {
-        $tricks = $this->trickManager->getAll();
-
-        $content = $this->twig->render('index.html.twig', array(
+        $content = $twig->render('index.html.twig', array(
             'tricks' => $tricks
         ));
 
-        $flashBag = $this->session->getFlashBag();
+        $flashBag = $session->getFlashBag();
         $flashBag->get('delete_trick');
 
         return new Response($content);

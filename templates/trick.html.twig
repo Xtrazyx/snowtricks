@@ -8,6 +8,11 @@
       {# NOM #}
       <li>{{ trick.name }}</li>
       <li>{{ trick.group.name }}</li>
+
+      {% if is_granted('ROLE_USER') %}
+        <li><a href="{{ path('edit_trick', {'id': trick.id}) }}">Editer</a></li>
+        <li><a href="{{ path('delete_trick', {'id': trick.id}) }}">Supprimer</a></li>
+      {% endif %}
       
       {# IMAGES #}
       <ul>
@@ -44,6 +49,43 @@
           {% endfor %}
         </div>
       </div>
+
+      {# POSTS #}
+      <div>
+        {% if is_granted('ROLE_USER') %}
+          <div id="post_form">
+            <div>Poster un message</div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Poster</button>
+            {{ form_end(form) }}
+          </div>
+        {% else %}
+          <p>Vous devez vous <a href="{{ path('login') }}">identifier</a> pour écrire un message.</p>
+        {% endif %}
+
+        {% if trick.posts is empty %}
+          <p>Il n'y a pas encore de message.</p>
+        {% else %}
+          {% for post in trick.posts %}
+            <div>
+              <div>
+                <span>{{ post.user.firstName }}&nbsp;{{ post.user.lastName }}</span>
+                &nbsp;-&nbsp;
+                <span>{{ post.dateCreation }}</span>
+              </div>
+              <div>
+                {{ post.content }}
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
   </ul>
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('js/') }}"
 {% endblock %}
