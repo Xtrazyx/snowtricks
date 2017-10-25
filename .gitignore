@@ -1,6 +1,7 @@
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
+
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -11,3 +12,4 @@
 
 /coverage/
 /.idea/
+public/uploads/

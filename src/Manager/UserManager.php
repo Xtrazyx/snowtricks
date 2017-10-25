@@ -53,5 +53,6 @@ class UserManager
     {
         $user = $this->repo->find($id);
         $this->em->remove($user);
+        $this->em->flush();
     }
 }

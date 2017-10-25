@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Traits\FromArrayTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})}, indexes={@ORM\Index(name="fk_User_Avatar_idx", columns={"avatar_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     use FromArrayTrait;
 
@@ -50,16 +51,21 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=45, nullable=false)
+     * @ORM\Column(name="password", type="string", length=1024, nullable=false)
      */
     private $password;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="role", type="string", length=45, nullable=true)
+     * @ORM\Column(name="role", type="array", length=45, nullable=true)
      */
-    private $role;
+    private $roles;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
     /**
      * @var Avatar
@@ -68,6 +74,11 @@ class User
      * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id")
      */
     private $avatar;
+
+    public function __construct()
+    {
+        $this->isActive = true;
+    }
 
     /**
      * @return int
@@ -111,6 +122,14 @@ class User
     }
 
     /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
      * @return string
      */
     public function getEmail()
@@ -143,19 +162,35 @@ class User
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getRole()
+    public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
     }
 
     /**
-     * @param string $role
+     * @param array $roles
      */
-    public function setRole($role)
+    public function setRoles($roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
     }
 
     /**
@@ -172,6 +207,37 @@ class User
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles
+            ) = unserialize($serialized);
+    }
+
+    public function getSalt()
+    {
+        return null;
     }
 
 }

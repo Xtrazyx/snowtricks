@@ -34,9 +34,16 @@ class TrickAction
     {
         $trick = $this->trickManager->getById($id);
 
-        $content = $this->twig->render('trick.html.twig', array(
-            'trick' => $trick
-        ));
+        if(!$trick){
+            $content = $this->twig->render('@Twig/Exception/error.html.twig', array(
+                'status_code' => '404',
+                'status_text' => 'La page demandée n\'existe pas'));
+        }else{
+            $content = $this->twig->render('trick.html.twig', array(
+                'trick' => $trick
+            ));
+        }
+
         return new Response($content);
     }
 }
