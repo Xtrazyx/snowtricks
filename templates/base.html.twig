@@ -20,10 +20,24 @@
       <menu>
         {% block menu %}
           <a href="{{ path('index') }}">Accueil</a>
-          <a href="{{ path('add_trick') }}">Ajouter une figure</a>
-          <a href="{{ path('register') }}">S'enregistrer</a>
-          <a href="{{ path('login') }}">Se connecter</a>
-          <a href="{{ path('logout') }}">Se déconnecter</a>
+
+          {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('add_trick') }}">Ajouter une figure</a>
+          {% endif %}
+
+          {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a href="{{ path('register') }}">S'enregistrer</a>
+            <a href="{{ path('login') }}">Se connecter</a>
+          {% endif %}
+
+          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a href="{{ path('logout') }}">Se déconnecter</a>
+          {% endif %}
+
+          {% if is_granted('ROLE_USER') %}
+            <img src="{{ asset(app.user.avatar.url) }}">
+          {% endif %}
+
         {% endblock %}
       </menu>
 
@@ -37,6 +51,11 @@
       </footer>
 
       {% block javascripts %}
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+            crossorigin="anonymous">
+        </script>
       {% endblock %}
     </body>
 </html>

@@ -8,8 +8,12 @@
 
 namespace App\Action;
 
+use App\Form\PostType;
+use App\Manager\PostManager;
 use App\Manager\TrickManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -17,14 +21,23 @@ class TrickAction
 {
     private $twig;
     private $trickManager;
+    private $postManager;
+    private $request;
+    private $formFactory;
 
     public function __construct(
         Environment $twig,
-        TrickManager $trickManager
+        TrickManager $trickManager,
+        PostManager $postManager,
+        RequestStack $requestStack,
+        FormFactory $formFactory
     )
     {
         $this->twig = $twig;
         $this->trickManager = $trickManager;
+        $this->postManager = $postManager;
+        $this->request = $requestStack->getCurrentRequest();
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -33,6 +46,9 @@ class TrickAction
     public function __invoke($id)
     {
         $trick = $this->trickManager->getById($id);
+        $post = $this->postManager->new();
+
+        $form = $this->formFactory->create(PostType::class, $post);
 
         if(!$trick){
             $content = $this->twig->render('@Twig/Exception/error.html.twig', array(
@@ -40,7 +56,8 @@ class TrickAction
                 'status_text' => 'La page demandée n\'existe pas'));
         }else{
             $content = $this->twig->render('trick.html.twig', array(
-                'trick' => $trick
+                'trick' => $trick,
+                'form' => $form->createView()
             ));
         }
 
