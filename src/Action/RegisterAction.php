@@ -16,6 +16,8 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Twig\Environment;
 
@@ -29,6 +31,7 @@ class RegisterAction
     private $formFactory;
     private $userManager;
     private $router;
+    private $tokenStorage;
 
     public function __construct(
         Environment $twig,
@@ -36,7 +39,8 @@ class RegisterAction
         UserPasswordEncoderInterface $passwordEncoder,
         FormFactory $formFactory,
         UserManager $userManager,
-        Router $router
+        Router $router,
+        TokenStorage $tokenStorage
     )
     {
         $this->twig = $twig;
@@ -45,6 +49,7 @@ class RegisterAction
         $this->formFactory = $formFactory;
         $this->userManager = $userManager;
         $this->router = $router;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -59,11 +64,17 @@ class RegisterAction
 
         if($form->isSubmitted() && $form->isValid())
         {
+            // New User with encoded password
             $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setRoles(array('ROLE_USER'));
 
             $this->userManager->persist($user);
+
+            // Auto login
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->tokenStorage->setToken($token);
+            $this->request->getSession()->set('_security_main', serialize($token));
 
             return $this->redirectToRoute('index');
         }
