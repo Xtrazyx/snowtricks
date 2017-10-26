@@ -55,7 +55,7 @@ class Trick
 
     /**
      * @var ArrayCollection
-     * @ORM\Column(nullable=true)
+     *
      * @ORM\OneToMany(targetEntity="Post", mappedBy="trick", cascade={"remove"})
      */
     private $posts;
@@ -160,6 +160,7 @@ class Trick
     public function addPost(Post $post)
     {
         $this->posts->add($post);
+        $post->setTrick($this);
     }
 
     /**

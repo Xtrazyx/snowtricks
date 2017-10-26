@@ -1,0 +1,11 @@
+{# POST #}
+<div>
+  <div>
+    <span>{{ post.user.firstName }}&nbsp;{{ post.user.lastName }}</span>
+    &nbsp;-&nbsp;
+    <span>{{ post.dateCreation|date }}</span>
+  </div>
+  <div>
+    {{ post.content }}
+  </div>
+</div>

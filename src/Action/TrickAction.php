@@ -46,17 +46,19 @@ class TrickAction
     public function __invoke($id)
     {
         $trick = $this->trickManager->getById($id);
-        $post = $this->postManager->new();
 
-        $form = $this->formFactory->create(PostType::class, $post);
+        $form = $this->formFactory->create(PostType::class, $this->postManager->new());
 
         if(!$trick){
             $content = $this->twig->render('@Twig/Exception/error.html.twig', array(
                 'status_code' => '404',
                 'status_text' => 'La page demandée n\'existe pas'));
         }else{
+            $posts = $this->postManager->getAll();
+
             $content = $this->twig->render('trick.html.twig', array(
                 'trick' => $trick,
+                'posts' => $posts,
                 'form' => $form->createView()
             ));
         }

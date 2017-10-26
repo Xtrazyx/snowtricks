@@ -52,40 +52,40 @@
 
       {# POSTS #}
       <div>
+
+        {# FORM #}
         {% if is_granted('ROLE_USER') %}
           <div id="post_form">
             <div>Poster un message</div>
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button type="submit">Poster</button>
+            <input type="hidden" name="trick_id" id="trick_id" value="{{ trick.id }}">
+            <button type="submit" id="post">Poster</button>
             {{ form_end(form) }}
+          </div>
+          <div id="new_post">
           </div>
         {% else %}
           <p>Vous devez vous <a href="{{ path('login') }}">identifier</a> pour écrire un message.</p>
         {% endif %}
 
-        {% if trick.posts is empty %}
+        {# POST LIST #}
+        {% if posts is empty %}
           <p>Il n'y a pas encore de message.</p>
         {% else %}
-          {% for post in trick.posts %}
-            <div>
-              <div>
-                <span>{{ post.user.firstName }}&nbsp;{{ post.user.lastName }}</span>
-                &nbsp;-&nbsp;
-                <span>{{ post.dateCreation }}</span>
-              </div>
-              <div>
-                {{ post.content }}
-              </div>
-            </div>
+          {% for post in posts %}
+            {{ include('post.html.twig', {'post': post}) }}
           {% endfor %}
         {% endif %}
       </div>
   </ul>
 
+  {# Ajax Loading Screen #}
+  <div class="loader"></div>
+
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
-  <script src="{{ asset('js/') }}"
+  <script src="{{ asset('js/post.js') }}"></script>
 {% endblock %}
