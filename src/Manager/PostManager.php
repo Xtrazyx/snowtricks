@@ -39,7 +39,10 @@ class PostManager
     // READ
     public function getAll()
     {
-        return $this->repo->findAll();
+        return $this->repo->findBy(
+            array(),
+            array('dateCreation' => 'DESC')
+        );
     }
 
     public function getById($id)

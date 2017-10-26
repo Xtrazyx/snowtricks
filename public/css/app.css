@@ -1,4 +1,33 @@
-/* --- MENU --- */
+/* MENU ---------------------------------------------- */
 menu a{
     padding: 15px;
+}
+
+/* AJAX LOADING SCREEN ------------------------------- */
+.loader{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb( 255, 255, 255 )
+    url('../img/loading.gif')
+    50% 50%
+    no-repeat;
+}
+
+body.loading{
+    overflow: hidden;
+}
+
+@keyframes showLoader {
+    from {opacity: 0;}
+    to {opacity: 0.5;}
+}
+
+body.loading .loader{
+    display: block;
+    animation: showLoader 350ms ease-in-out both;
 }

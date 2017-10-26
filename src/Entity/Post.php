@@ -48,7 +48,7 @@ class Post
     private $user;
 
     /**
-     * @var $trick Trick
+     * @var Trick
      *
      * @ORM\ManyToOne(targetEntity="Trick", inversedBy="posts")
      * @ORM\JoinColumns({
@@ -133,7 +133,6 @@ class Post
     public function setTrick(Trick $trick)
     {
         $this->trick = $trick;
-        $trick->addPost($this);
     }
 
 }
