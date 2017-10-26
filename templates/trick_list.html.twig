@@ -1,0 +1,31 @@
+{# LISTE DES FIGURES #}
+<ul>
+  {% for trick in tricks %}
+
+    {# NOM #}
+    <li>{{ trick.name }}</li>
+    <li>{{ trick.group.name }}</li>
+    <li><a href="{{ path('trick', {'id': trick.id}) }}">Voir le détail</a></li>
+
+    {% if is_granted('ROLE_USER') %}
+      <li><a href="{{ path('edit_trick', {'id': trick.id}) }}">Editer</a></li>
+      <li><a href="{{ path('delete_trick', {'id': trick.id}) }}">Supprimer</a></li>
+    {% endif %}
+
+    {# IMAGES #}
+    <ul>
+      {% for image in trick.trickImages %}
+        <li>{{ image.fileName }}</li>
+        <li><img src="{{ asset(image.url) }}"></li>
+      {% endfor %}
+    </ul>
+
+    {# VIDEOS #}
+    <ul>
+      {% for video in trick.videos %}
+        <li>{{ video.sourceId }}</li>
+      {% endfor %}
+    </ul>
+
+  {% endfor %}
+</ul>
