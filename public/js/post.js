@@ -1,3 +1,4 @@
+// Manage form submit and server response
 $('button#post').on('click', function (e) {
     e.preventDefault();
 
@@ -16,15 +17,4 @@ $('button#post').on('click', function (e) {
             alert("Une erreur s'est produite durant l'envoi des données.")
         }
     });
-});
-
-// Loading screen for Ajax request
-$body = $('body');
-$(document).bind({
-    ajaxStart: function(){
-        $body.addClass('loading');
-    },
-    ajaxStop: function(){
-        $body.removeClass('loading');
-    }
 });

@@ -39,11 +39,7 @@ class IndexAction
         Session $session
     )
     {
-        $tricks = $trickManager->getAll();
-
-        $content = $twig->render('index.html.twig', array(
-            'tricks' => $tricks
-        ));
+        $content = $twig->render('index.html.twig');
 
         $flashBag = $session->getFlashBag();
         $flashBag->get('delete_trick');

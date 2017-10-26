@@ -45,6 +45,11 @@ class PostManager
         );
     }
 
+    public function getAllByTrick($id)
+    {
+        return $this->repo->getAllByTrick($id);
+    }
+
     public function getById($id)
     {
         return $this->repo->find($id);
@@ -63,4 +68,5 @@ class PostManager
         $this->em->remove($post);
         $this->em->flush();
     }
+
 }

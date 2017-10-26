@@ -50,11 +50,15 @@
         JHD © 2017
       </footer>
 
+      {# Ajax Loading Screen #}
+      <div class="loader"></div>
+
       {% block javascripts %}
         <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+        <script src="{{ asset('js/ajax_loading_screen.js') }}"></script>
       {% endblock %}
     </body>
 </html>

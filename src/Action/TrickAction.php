@@ -54,7 +54,7 @@ class TrickAction
                 'status_code' => '404',
                 'status_text' => 'La page demandée n\'existe pas'));
         }else{
-            $posts = $this->postManager->getAll();
+            $posts = $this->postManager->getAllByTrick($trick->getId());
 
             $content = $this->twig->render('trick.html.twig', array(
                 'trick' => $trick,

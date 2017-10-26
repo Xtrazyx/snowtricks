@@ -8,9 +8,9 @@
 
 namespace App\Manager;
 
+use App\Action\ListTrickAction;
 use App\Entity\Trick;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\Form;
 
 class TrickManager
 {
@@ -38,9 +38,14 @@ class TrickManager
     }
 
     // READ
-    public function getAll()
+    public function getAllCount()
     {
-        return $this->repo->findAll();
+        return $this->repo->getAllCount();
+    }
+
+    public function getAllPage($page)
+    {
+        return $this->repo->getAllPagination($page, ListTrickAction::NB_PER_PAGE);
     }
 
     public function getById($id)

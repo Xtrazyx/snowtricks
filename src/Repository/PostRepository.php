@@ -12,5 +12,15 @@ use Doctrine\ORM\EntityRepository;
 
 class PostRepository extends EntityRepository
 {
+    public function getAllByTrick($id)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->leftJoin('p.trick', 't')
+            ->where('t.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+        ;
 
+        return $query->getResult();
+    }
 }
