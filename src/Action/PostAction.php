@@ -51,13 +51,10 @@ class PostAction
         $trick->addPost($post);
         $trickManager->update();
 
-        $response = new Response($twig->render(
+        return new Response($twig->render(
             'post.html.twig', array(
             'post' => $post
             )
         ));
-
-        return $response;
     }
-
 }

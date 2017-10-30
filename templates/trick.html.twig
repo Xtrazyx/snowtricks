@@ -71,7 +71,7 @@
 
         {# POST LIST #}
         {% if posts is empty %}
-          <p>Il n'y a pas encore de message.</p>
+          <p id="no_post">Il n'y a pas encore de message.</p>
         {% else %}
           {% for post in posts %}
             {{ include('post.html.twig', {'post': post}) }}
