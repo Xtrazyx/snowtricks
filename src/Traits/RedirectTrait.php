@@ -36,7 +36,7 @@ trait RedirectTrait
     protected function redirectToRoute($route, array $parameters = array(), $status = 302)
     {
         $router = $this->getRouter();
-        $url = $router->generate($route, $parameters, $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH);
+        $url = $router->generate($route, $parameters, UrlGeneratorInterface::ABSOLUTE_PATH);
         return new RedirectResponse($url, $status);
     }
 }

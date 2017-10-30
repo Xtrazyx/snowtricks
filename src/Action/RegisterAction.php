@@ -71,7 +71,7 @@ class RegisterAction
 
             $this->userManager->persist($user);
 
-            // Auto login
+            // Auto login - TODO Replace by an email confirmation to fight the mean bots
             $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
             $this->tokenStorage->setToken($token);
             $this->request->getSession()->set('_security_main', serialize($token));

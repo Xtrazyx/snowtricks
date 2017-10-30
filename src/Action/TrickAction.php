@@ -13,7 +13,6 @@ use App\Manager\PostManager;
 use App\Manager\TrickManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -22,21 +21,18 @@ class TrickAction
     private $twig;
     private $trickManager;
     private $postManager;
-    private $request;
     private $formFactory;
 
     public function __construct(
         Environment $twig,
         TrickManager $trickManager,
         PostManager $postManager,
-        RequestStack $requestStack,
         FormFactory $formFactory
     )
     {
         $this->twig = $twig;
         $this->trickManager = $trickManager;
         $this->postManager = $postManager;
-        $this->request = $requestStack->getCurrentRequest();
         $this->formFactory = $formFactory;
     }
 

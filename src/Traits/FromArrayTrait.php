@@ -17,7 +17,7 @@ trait FromArrayTrait
      * @throws \Exception
      * @return object
      */
-    static function newFromArray($array)
+    static public function newFromArray($array)
     {
         if(class_exists($className = get_called_class()))
         {
