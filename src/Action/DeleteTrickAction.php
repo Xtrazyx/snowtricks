@@ -13,25 +13,21 @@ use App\Traits\RedirectTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
-use Twig\Environment;
 
 class DeleteTrickAction
 {
     use RedirectTrait;
 
-    private $twig;
     private $trickManager;
     private $router;
     private $session;
 
     public function __construct(
-        Environment $twig,
         TrickManager $trickManager,
         Router $router,
         Session $session
     )
     {
-        $this->twig = $twig;
         $this->trickManager = $trickManager;
         $this->router = $router;
         $this->session= $session;

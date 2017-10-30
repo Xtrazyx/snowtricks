@@ -2,15 +2,6 @@
 
 {% block content %}
 
-  {# Message Flash #}
-  {% for messages in app.session.flashbag.all %}
-    <div class="alert alert-success">
-      {% for message in messages %}
-        <p>{{ message }}</p>
-      {% endfor %}
-    </div>
-  {% endfor %}
-
   {# LISTE DES FIGURES #}
   <div id="trick_list"></div>
 

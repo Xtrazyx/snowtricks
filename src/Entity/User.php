@@ -77,7 +77,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
-        $this->isActive = true;
+        $this->isActive = false;
     }
 
     /**
@@ -186,9 +186,9 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $isActive
+     * @param boolean
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
         $this->isActive = $isActive;
     }

@@ -11,7 +11,8 @@ $('button#post').on('click', function (e) {
         type: 'POST',
         success: function(html){
             $('div#new_post').append(html);
-            $('input#post_content').text('');
+            $('#post_content').val('');
+            $('#no_post').remove();
         },
         error: function(){
             alert("Une erreur s'est produite durant l'envoi des données.")

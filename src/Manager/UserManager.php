@@ -42,6 +42,11 @@ class UserManager
         return $this->repo->find($id);
     }
 
+    public function getByEmail($email)
+    {
+        return $this->repo->findBy(array('email' => $email));
+    }
+
     // UPDATE
     public function update()
     {
