@@ -18,6 +18,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.trick', 't')
             ->where('t.id = :id')
             ->setParameter('id', $id)
+            ->orderBy('p.dateCreation', 'DESC')
             ->getQuery()
         ;
 

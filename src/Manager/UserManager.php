@@ -44,7 +44,7 @@ class UserManager
 
     public function getByEmail($email)
     {
-        return $this->repo->findBy(array('email' => $email));
+        return $this->repo->findOneBy(array('email' => $email));
     }
 
     // UPDATE

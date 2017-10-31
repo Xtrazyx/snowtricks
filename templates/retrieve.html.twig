@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+  <h2>Indiquer votre adresse email ci-dessous. Vous recevrez un message, veuillez en suivre les instructions.</h2>
+
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+  <button type="submit">Envoyer</button>
+  {{ form_end(form) }}
+
+{% endblock %}
