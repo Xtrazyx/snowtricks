@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Twig\Environment;
 
-class MailConfirmAction
+class MailRegisterAction
 {
     use RedirectTrait;
 
@@ -37,11 +37,9 @@ class MailConfirmAction
     }
 
     /**
-     * @Route("/mail_confirm/{email}/{confirm_token}", name="mail_confirm")
+     * @Route("/mail_register/{email}/{confirm_token}", name="mail_register")
      *
      * @param Environment $twig
-     * @param FormFactory $formFactory
-     * @param RequestStack $requestStack
      * @param UserManager $userManager
      * @param Session $session
      * @param UserPasswordEncoderInterface $encoder
@@ -52,8 +50,6 @@ class MailConfirmAction
      */
     public function __invoke(
         Environment $twig,
-        FormFactory $formFactory,
-        RequestStack $requestStack,
         UserManager $userManager,
         Session $session,
         UserPasswordEncoderInterface $encoder,
@@ -61,43 +57,25 @@ class MailConfirmAction
         $confirm_token
     )
     {
-        $request = $requestStack->getCurrentRequest();
-        $form = $formFactory->create(ChangePasswordType::class);
-        $form->handleRequest($request);
         $flashBag = $session->getFlashBag();
-
         $user = $userManager->getByEmail($email);
-
-        // Handle form submission if token valid
-        if($form->isSubmitted() && $form->isValid() && $user instanceof User)
-        {
-            if (md5($confirm_token) == $session->get('cryptToken'))
-            {
-                $data = $form->getData();
-                $user->setPassword(
-                    $encoder->encodePassword(
-                        $user, $data['password'])
-                );
-                $userManager->update();
-                $session->remove('cryptToken');
-
-                $flashBag->add('success', 'Votre nouveau mot de passe est actif, merci de vous identifier.');
-                return $this->redirectToRoute('login');
-            }
-
-            $flashBag->add('warning', 'Un problème est survenu, identification impossible.');
-            return $this->redirectToRoute('login');
-        }
 
         // Check the user with send token and session token
         if($user instanceof User)
         {
-            if(md5($confirm_token) == $request->getSession()->get('cryptToken'))
+            if(md5($confirm_token) == $session->get('RegisterToken'))
             {
-                return new Response($twig->render(
-                    'change_password.html.twig', array(
-                    'form' => $form->createView()
-                )));
+                // Render the user able to login
+                $user->setActive(true);
+                $userManager->update();
+
+                // Destroy the token
+                $session->remove('RegisterToken');
+
+                // Flash
+                $flashBag->add('success', 'Votre adresse est confirmée.');
+
+                return new Response($twig->render('confirm_register.html.twig'));
             }
         }
 

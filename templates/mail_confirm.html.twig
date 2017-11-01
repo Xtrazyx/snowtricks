@@ -1,5 +1,13 @@
 <h1>Snowtricks</h1>
+
 <h2>Le site communautaire du snowboard acrobatique !</h2>
-<h3>Cliquez sur le lien ci-dessous pour activer votre compte:</h3>
-<p><a href="snowtricks/mail_confirm/{{ email }}/{{ confirm_token }}">snowtricks/mail_confirm/{{ email }}/{{ confirm_token }}</a></p>
+
+<h3>Cliquez sur le lien ci-dessous pour changer votre mot de passe:</h3>
+
+<p>
+  <a href="{{ absolute_url(path('mail_confirm', {'email': email, 'confirm_token': confirm_token})) }}">
+    {{ absolute_url(path('mail_confirm', {'email': email, 'confirm_token': confirm_token})) }}
+  </a>
+</p>
+
 <p>A très bientôt sur snowtricks !</p>
