@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="trick", uniqueConstraints={@ORM\UniqueConstraint(name="name_UNIQUE", columns={"name"})}, indexes={@ORM\Index(name="fk_Trick_Group1_idx", columns={"group_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
- * @UniqueEntity("name")
+ * @UniqueEntity(fields={"name"}, message="Cette figure existe déjà. Choisissez un autre nom.")
  */
 class Trick
 {

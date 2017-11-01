@@ -1,0 +1,9 @@
+swiftmailer:
+    # url: '%env(MAILER_URL)%'
+    transport:    smtp
+    auth_mode:    login
+    host:         smtp.sendgrid.net
+    encryption:   ssl
+    port:         465
+    username:     apikey
+    password:     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
