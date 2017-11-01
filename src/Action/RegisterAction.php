@@ -15,9 +15,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Twig\Environment;
 
@@ -25,61 +25,78 @@ class RegisterAction
 {
     use RedirectTrait;
 
-    private $twig;
-    private $request;
-    private $passwordEncoder;
-    private $formFactory;
-    private $userManager;
     private $router;
-    private $tokenStorage;
 
-    public function __construct(
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
+
+    /**
+     * @Route("/register", name="register")
+     *
+     * @param Environment $twig
+     * @param RequestStack $requestStack
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param FormFactory $formFactory
+     * @param UserManager $userManager
+     * @param TokenStorage $tokenStorage
+     * @param Session $session
+     * @param \Swift_Mailer $mailer
+     *
+     * @return Response
+     *
+     */
+    public function __invoke(
         Environment $twig,
         RequestStack $requestStack,
         UserPasswordEncoderInterface $passwordEncoder,
         FormFactory $formFactory,
         UserManager $userManager,
-        Router $router,
-        TokenStorage $tokenStorage
+        TokenStorage $tokenStorage,
+        Session $session,
+        \Swift_Mailer $mailer
     )
     {
-        $this->twig = $twig;
-        $this->request = $requestStack->getCurrentRequest();
-        $this->passwordEncoder = $passwordEncoder;
-        $this->formFactory = $formFactory;
-        $this->userManager = $userManager;
-        $this->router = $router;
-        $this->tokenStorage = $tokenStorage;
-    }
+        $request = $requestStack->getCurrentRequest();
+        $user = $userManager->new();
+        $form = $formFactory->create(RegisterType::class, $user);
+        $flashBag = $session->getFlashBag();
 
-    /**
-     * @Route("/register", name="register")
-     */
-    public function __invoke()
-    {
-        $user = $this->userManager->new();
-        $form = $this->formFactory->create(RegisterType::class, $user);
-
-        $form->handleRequest($this->request);
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
             // New User with encoded password
-            $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setRoles(array('ROLE_USER'));
 
-            $this->userManager->persist($user);
+            $userManager->persist($user);
 
-            // Auto login - TODO Replace by an email confirmation to fight the mean bots
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->tokenStorage->setToken($token);
-            $this->request->getSession()->set('_security_main', serialize($token));
+            // Mail confirmation to make user active
+            $mailToken = bin2hex(random_bytes(16));
+            $cryptToken = md5($mailToken);
+            $request->getSession()->set('RegisterToken', $cryptToken);
 
-            return $this->redirectToRoute('index');
+            // Message creation
+            $message = new \Swift_Message(
+                'Confirmer votre adresse email',
+                $twig->render('mail_confirm_register.html.twig', array('confirm_token' => $mailToken, 'email' => $user->getEmail())),
+                'text/html',
+                'utf-8');
+            $message->setFrom('xtrazyx@gmail.com');
+            $message->setTo($user->getEmail());
+
+            // Message sending
+            $mailer->send($message);
+
+            $flashBag->add('info', 'Vous allez recevoir un email contenant les instructions pour activer votre compte.');
+
+            return $this->redirectToRoute('login');
         }
 
-        return new Response($this->twig->render(
+        return new Response($twig->render(
             'register.html.twig', array(
             'form' => $form->createView()
         )));

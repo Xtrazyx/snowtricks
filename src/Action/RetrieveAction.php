@@ -81,8 +81,8 @@ class RetrieveAction
                 $message = new \Swift_Message(
                     'Changement de mot de passe demandé',
                     $twig->render('mail_confirm.html.twig', array('confirm_token' => $mailToken, 'email' => $user->getEmail())),
-                    'html',
-                    'UTF8'
+                    'text/html',
+                    'utf-8'
                 );
 
                 $message->setFrom('xtrazyx@gmail.com');

@@ -4,16 +4,18 @@ namespace App\Entity;
 
 use App\Traits\FromArrayTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})}, indexes={@ORM\Index(name="fk_User_Avatar_idx", columns={"avatar_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="L'email existe déjà, entrez un autre email.")
  */
-class User implements UserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
     use FromArrayTrait;
 
@@ -80,6 +82,62 @@ class User implements UserInterface, \Serializable
         $this->isActive = false;
     }
 
+    /* ADVANCED USER INTERFACE */
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+        // Prevent inactive user from logging
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /* SERIALIZABLE INTERFACE */
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles,
+            $this->isActive
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles,
+            $this->isActive
+            ) = unserialize($serialized);
+    }
+
+    /* GETTERS SETTERS */
     /**
      * @return int
      * @codeCoverageIgnore
@@ -208,36 +266,4 @@ class User implements UserInterface, \Serializable
     {
         $this->avatar = $avatar;
     }
-
-    public function eraseCredentials()
-    {
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->email,
-            $this->password,
-            $this->roles
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->email,
-            $this->password,
-            $this->roles
-            ) = unserialize($serialized);
-    }
-
-    public function getSalt()
-    {
-        return null;
-    }
-
 }
