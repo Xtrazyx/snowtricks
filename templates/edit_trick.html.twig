@@ -1,6 +1,11 @@
 {% extends "base.html.twig" %}
 
-{#{% form_theme form 'image_file_widget.html.twig' %}#}
+{% block stylesheets %}
+  {{ parent() }}
+
+  {# Lightbox css #}
+  <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}">
+{% endblock %}
 
 {% block content %}
   <section class="section-figure">
@@ -9,21 +14,30 @@
         {# FORM #}
         <h1>Edition d'une figure</h1>
 
+        <div><button class="btn btn-default" onclick="openModal('lib')">Editer les images</button></div>
+
         {{ include('form.html.twig', {'form': form}) }}
 
       </div>
     </div>
   </section>
+
+  <div id="libModal" class="modal fade" role="dialog">
+    <div class="modal-content">
+
+      {{ include('lib_image.html.twig', {'trick': trick}) }}
+
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
   <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-      crossorigin="anonymous">
+      src="{{ asset('js/edit_video_form_adder.js') }}">
   </script>
   <script
-      src="{{ asset('js/edit_video_form_adder.js') }}">
+      src="{{ asset('js/lightbox.js') }}">
   </script>
 {% endblock %}
