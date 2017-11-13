@@ -1,88 +1,196 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+  {{ parent() }}
+
+  {# Lightbox css #}
+  <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}">
+{% endblock %}
+
 {% block content %}
-  <p><a href="{{ path('index') }}">< Retour à la liste</a></p>
+  <section class="section-figure">
+    <div class="content">
+        <p class="return"><a href="{{ path('index') }}">< Retour à la liste</a></p>
 
-  {# FIGURE #}
-  <ul>
-      {# NOM #}
-      <li>{{ trick.name }}</li>
-      <li>{{ trick.group.name }}</li>
+        {# FIGURE #}
+        <div class="trick-detail">
 
-      {% if is_granted('ROLE_USER') %}
-        <li><a href="{{ path('edit_trick', {'id': trick.id}) }}">Editer</a></li>
-        <li><a href="{{ path('delete_trick', {'id': trick.id}) }}">Supprimer</a></li>
-      {% endif %}
-      
-      {# IMAGES #}
-      <ul>
-        {% for image in trick.trickImages %}
-          <li><img src="{{ asset(image.url) }}"></li>
-        {% endfor %}
-      </ul>
-
-      {# VIDEOS #}
-      <div>
-        {% for video in trick.videos %}
-          <div>
-            {# YOUTUBE #}
-            {% if video.sourceId|length == 11 %}
-              <iframe
-                  frameborder="0"
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/{{ video.sourceId }}"
-                  allowfullscreen>
-              </iframe>
-            {# DAILYMOTION #}
-            {% elseif video.sourceId|length == 7 %}
-              <iframe
-                  frameborder="0"
-                  width="560"
-                  height="315"
-                  src="//www.dailymotion.com/embed/video/{{ video.sourceId }}"
-                  allowfullscreen>
-              </iframe>
-            {% else %}
-              <p>L'ID de la vidéo n'a pas le bon format.</p>
+          {# IMAGE RONDE #}
+          {% for image in trick.trickImages %}
+            {% if loop.first %}
+              <div class="round-thumb">
+                <img src="{{ asset(image.url) }}" alt="{{ image.alt }}">
+              </div>
             {% endif %}
           {% endfor %}
-        </div>
-      </div>
 
+          {# NOM #}
+          <div class="name">
+            <span>{{ trick.name }}</span>
+            {% if is_granted('ROLE_USER') %}
+
+              {# EDIT #}
+              <span>
+                <a href="{{ path('edit_trick', {'id': trick.id}) }}">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+              </span>
+
+              {# DELETE #}
+              <span>
+                <a href="{{ path('delete_trick', {'id': trick.id}) }}">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </span>
+            {% endif %}
+          </div>
+          <div class="group">{{ trick.group.name }}</div>
+
+          {# DESCRIPTION #}
+          <div class="description">
+            <div>
+              {{ trick.description | nl2br() }}
+            </div>
+          </div>
+
+          {# IMAGES : vignettes et liens vers la gallerie #}
+          <h2>Images</h2>
+          <div class="img-container">
+            {% for image in trick.trickImages %}
+              <div class="img-block">
+                <img
+                    src="{{ asset(image.url) }}"
+                    class="hover-shadow"
+                    width="210"
+                    onclick="openModal('image');currentSlide({{ loop.index }}, 'Image')"
+                />
+              </div>
+            {% endfor %}
+          </div>
+
+          {# VIDEOS : vignettes et liens vers la gallerie #}
+          <h2>Vidéos</h2>
+          <div class="img-container">
+            {% for video in trick.videos %}
+              {% if video.sourceId|length == 11 %}
+
+                {# YOUTUBE #}
+                <div class="img-block">
+                  <img
+                      class="hover-shadow"
+                      width="210"
+                      src="https://i.ytimg.com/vi/{{ video.sourceId }}/hqdefault.jpg"
+                      onclick="openModal('video');currentSlide({{ loop.index }}, 'Video')"
+                  />
+                </div>
+
+              {% elseif video.sourceId|length == 7 %}
+
+                {# DAILYMOTION #}
+                <div class="img-block">
+                  <img
+                      class="hover-shadow"
+                      width="210"
+                      src="https://www.dailymotion.com/thumbnail/video/{{ video.sourceId }}"
+                      onclick="openModal('video');currentSlide({{ loop.index }}, 'Video')"
+                   />
+                </div>
+              {% else %}
+                <p>L'ID de la vidéo n'a pas le bon format.</p>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="section-post">
       {# POSTS #}
-      <div>
+      <div class="content">
 
         {# FORM #}
         {% if is_granted('ROLE_USER') %}
           <div id="post_form">
-            <div>Poster un message</div>
+            <h2>Que pensez-vous de la figure {{ trick.name }}?</h2>
             {{ form_start(form) }}
             {{ form_widget(form) }}
             <input type="hidden" name="trick_id" id="trick_id" value="{{ trick.id }}">
-            <button type="submit" id="post">Poster</button>
+            <button class="btn btn-default" type="submit" id="post">Poster</button>
             {{ form_end(form) }}
           </div>
-          <div id="new_post">
-          </div>
         {% else %}
-          <p>Vous devez vous <a href="{{ path('login') }}">identifier</a> pour écrire un message.</p>
+          <h2>Que pensez-vous de la figure {{ trick.name }}?</h2>
+          <p class="instruction">Vous devez vous <a href="{{ path('login') }}">identifier</a> pour écrire un message.</p>
         {% endif %}
 
         {# POST LIST #}
         {% if posts is empty %}
           <p id="no_post">Il n'y a pas encore de message.</p>
         {% else %}
-          {% for post in posts %}
-            {{ include('post.html.twig', {'post': post}) }}
-          {% endfor %}
+          <div class="post-zone">
+            <div id="new_post"></div>
+            {% for post in posts %}
+              {{ include('post.html.twig', {'post': post}) }}
+            {% endfor %}
+          </div>
         {% endif %}
       </div>
-  </ul>
+  </section>
+
+  {# Modal pour l'affichage de la gallerie d'image #}
+  <div id="lightBoxModal1" class="modal fade" role="dialog">
+    <div class="modal-content">
+      {% for image in trick.TrickImages %}
+        <div class="mySlidesImage">
+          <span class="close" onclick="closeModal()"><i class="fa fa-window-close fa-2x" style="color:#B0413E"></i></span>
+          <img
+              src="{{ asset(image.url) }}"
+          />
+        </div>
+      {% endfor %}
+      <a class="prev" onclick="plusSlides(-1, 'Image')">&#10094;</a>
+      <a class="next" onclick="plusSlides(1, 'Image')">&#10095;</a>
+    </div>
+  </div>
+
+  {# Modal pour l'affichage de la gallerie de vidéo #}
+  <div id="lightBoxModal2" class="modal fade" role="dialog">
+    <div class="modal-content">
+      {% for video in trick.videos %}
+        <div class="mySlidesVideo">
+          <span class="close" onclick="closeModal()"><i class="fa fa-window-close fa-2x" style="color:#B0413E"></i></span>
+          {# YOUTUBE #}
+          {% if video.sourceId|length == 11 %}
+            <iframe
+                frameborder="0"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/{{ video.sourceId }}"
+                allowfullscreen>
+            </iframe>
+            {# DAILYMOTION #}
+          {% elseif video.sourceId|length == 7 %}
+            <iframe
+                frameborder="0"
+                width="560"
+                height="315"
+                src="//www.dailymotion.com/embed/video/{{ video.sourceId }}"
+                allowfullscreen>
+            </iframe>
+          {% else %}
+            <p>L'ID de la vidéo n'a pas le bon format.</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <a class="prev" onclick="plusSlides(-1, 'Video')">&#10094;</a>
+      <a class="next" onclick="plusSlides(1, 'Video')">&#10095;</a>
+    </div>
+  </div>
 
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('js/post.js') }}"></script>
+  <script src="{{ asset('js/lightbox.js') }}"></script>
 {% endblock %}

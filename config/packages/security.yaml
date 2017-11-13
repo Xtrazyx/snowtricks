@@ -36,4 +36,6 @@ security:
         - { path: ^/edit_trick, roles: ROLE_USER }
         - { path: ^/delete_trick, roles: ROLE_USER }
         - { path: ^/add_trick, roles: ROLE_USER }
+        - { path: ^/post, roles: ROLE_USER }
+        - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

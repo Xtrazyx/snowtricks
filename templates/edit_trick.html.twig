@@ -1,9 +1,21 @@
 {% extends "base.html.twig" %}
 
+{#{% form_theme form 'image_file_widget.html.twig' %}#}
+
 {% block content %}
-  {{ form_start(form) }}
-  {{ form_widget(form) }}
-  {{ form_end(form) }}
+  <section class="section-figure">
+    <div class="content content-full">
+      <div class="large-form">
+        {# FORM #}
+        <h1>Edition d'une figure</h1>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-default">Envoyer</button>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </section>
 {% endblock %}
 
 {% block javascripts %}
@@ -14,9 +26,6 @@
       crossorigin="anonymous">
   </script>
   <script
-      src="{{ asset('js/image_form_adder.js') }}">
-  </script>
-  <script
-      src="{{ asset('js/video_form_adder.js') }}">
+      src="{{ asset('js/edit_video_form_adder.js') }}">
   </script>
 {% endblock %}

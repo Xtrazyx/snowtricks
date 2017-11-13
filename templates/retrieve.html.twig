@@ -1,12 +1,20 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
+  <section class="section-figure">
+    <div class="content-full">
+      <div class="login-form">
+        <h1>Réinitialisation du&nbsp;mot&nbsp;de&nbsp;passe</h1>
+        <p class="instruction">
+          Indiquer votre adresse email ci-dessous. Vous recevrez un message, veuillez en suivre les instructions.
+        </p>
 
-  <h2>Indiquer votre adresse email ci-dessous. Vous recevrez un message, veuillez en suivre les instructions.</h2>
-
-  {{ form_start(form) }}
-  {{ form_widget(form) }}
-  <button type="submit">Envoyer</button>
-  {{ form_end(form) }}
-
+        {# FORM #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-default">Envoyer</button>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </section>
 {% endblock %}

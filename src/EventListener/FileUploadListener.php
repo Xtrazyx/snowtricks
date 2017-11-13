@@ -10,6 +10,7 @@ namespace App\EventListener;
 
 use App\Entity\Trick;
 use App\Entity\TrickImage;
+use App\Entity\User;
 use App\Upload\FileUploader;
 use App\Upload\Image;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -74,18 +75,28 @@ class FileUploadListener
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof Trick) {
-            return;
-        }
-
-        /**
-         * @param TrickImage $trickImage
-         */
-        foreach ($entity->getTrickImages() as $trickImage)
-        {
-            if (file_exists($fileName = $trickImage->getFileName())) {
-                $trickImage->setfileName(new File($fileName));
+        if ($entity instanceof Trick) {
+            /**
+             * @param TrickImage $trickImage
+             */
+            foreach ($entity->getTrickImages() as $trickImage)
+            {
+                if (file_exists($fileName = $trickImage->getFileName())) {
+                    $trickImage->setfileName(new File($fileName));
+                }
             }
         }
+
+        if ($entity instanceof User) {
+            /**
+             * @param TrickImage $trickImage
+             */
+
+                if (file_exists($fileName = $entity->getAvatar()->getFileName())) {
+                    $entity->getAvatar()->setfileName(new File($fileName));
+                }
+
+        }
+
     }
 }

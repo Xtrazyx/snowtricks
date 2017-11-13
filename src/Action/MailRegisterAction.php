@@ -9,12 +9,9 @@
 namespace App\Action;
 
 use App\Entity\User;
-use App\Form\ChangePasswordType;
 use App\Manager\UserManager;
 use App\Traits\RedirectTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;

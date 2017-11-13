@@ -2,11 +2,34 @@
 
 {% block content %}
 
-  {# LISTE DES FIGURES #}
-  <div id="trick_list"></div>
+  {# SECTION FIGURES #}
+  <section class="section-figure">
+    <div class="content">
+      <h1>Découvrez les figures du snowboard</h1>
 
-  {# PAGINATION #}
-  <div id="paginator" class="pagination"></div>
+      {# LISTE DES FIGURES #}
+      <div id="trick_list"></div>
+
+      {# PAGINATION #}
+      <div id="paginator" class="pagination"></div>
+    </div>
+  </section>
+
+  <section class="section-go">
+    <div class="content">
+      <h1 class="title-go">Participez et ajoutez une nouvelle figure !</h1>
+      <div class="btn-zone">
+        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <a class="btn btn-default" href="{{ path('register') }}">S'inscrire</a>
+          <a class="btn btn-default" href="{{ path('login') }}">Se connecter</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER') %}
+          <a class="btn btn-default" href="{{ path('add_trick') }}">Ajouter une figure</a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
 
 {% endblock %}
 

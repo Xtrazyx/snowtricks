@@ -1,9 +1,19 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-  {{ form_start(form) }}
-  {{ form_widget(form) }}
-  {{ form_end(form) }}
+  <section class="section-figure">
+    <div class="content content-full">
+      <div class="large-form">
+        <h1>Ajout d'une figure</h1>
+        <p class="instruction">Merci de remplir tous les champs ci-dessous</p>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-default">Envoyer</button>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </section>
 {% endblock %}
 
 {% block javascripts %}

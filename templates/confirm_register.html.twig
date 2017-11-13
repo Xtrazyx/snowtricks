@@ -1,7 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-  <div>
-    <a href="{{ path('login') }}">Cliquez maintenant pour vous connecter.</a>
+  <div class="content-full">
+    <div class="login-form">
+      <div class="form-group">
+        <a href="{{ path('login') }}">Cliquez maintenant pour vous connecter.</a>
+      </div>
+    </div>
   </div>
 {% endblock %}

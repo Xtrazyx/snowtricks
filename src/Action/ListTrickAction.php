@@ -16,7 +16,7 @@ use Twig\Environment;
 
 class ListTrickAction
 {
-    const NB_PER_PAGE = 5; // Trick number per page (pagination)
+    const NB_PER_PAGE = 10; // Trick number per page (pagination)
 
     /**
      * @Route("/list_trick", name="list_trick")

@@ -20,7 +20,7 @@ class TrickRepository extends EntityRepository
             ->addSelect('g')
             ->leftJoin('t.trickImages', 'i')
             ->addSelect('i')
-            ->orderBy('i.id', 'DESC')
+            ->orderBy('t.id', 'DESC')
             ->getQuery()
         ;
 

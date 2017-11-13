@@ -43,7 +43,7 @@ class DeleteTrickAction
 
         $flashBag = $this->session->getFlashBag();
         $flashBag->add(
-            'delete_trick',
+            'success',
             "La figure " . $trickName . " a bien été supprimée."
         );
 
