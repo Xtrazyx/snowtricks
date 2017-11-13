@@ -8,11 +8,9 @@
       <div class="large-form">
         {# FORM #}
         <h1>Edition d'une figure</h1>
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-default">Envoyer</button>
-        {{ form_end(form) }}
+
+        {{ include('form.html.twig', {'form': form}) }}
+
       </div>
     </div>
   </section>

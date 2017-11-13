@@ -1,0 +1,17 @@
+<div class="img-item">
+  <img src="{{ asset(image.url) }}">
+
+  {# EDIT #}
+  <span>
+    <a href="{{ path('manage_image', {'image_id': image.id}) }}">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    </a>
+  </span>
+
+  {# DELETE #}
+  <span>
+    <a href="{{ path('manage_image', {'image_id': image.id}) }}">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </a>
+  </span>
+</div>

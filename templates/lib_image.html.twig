@@ -1,0 +1,15 @@
+<input type="hidden" id="#trick_id" value="{{ trickId }}">
+
+<div class="lib-container">
+  <h1>Bibliothèque d'image pour {{ trick.name }}</h1>
+  <div>
+    <a href="{{ path('manage_image', {'actionType': 'create'}) }}">Ajouter une image</a>
+  </div>
+  
+  <div class="img-list">
+    {% for image in trickImages %}
+      {{ include('lib_image_item.html.twig', {'image': image}) }}
+    {% endfor %}
+  </div>
+
+</div>

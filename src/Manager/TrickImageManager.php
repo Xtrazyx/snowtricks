@@ -24,6 +24,21 @@ class TrickImageManager
         $this->repo = $this->em->getRepository(TrickImage::class);
     }
 
+    // CREATE
+    public function new(){
+        return new TrickImage();
+    }
+
+    public function persist(TrickImage $image){
+        $this->em->persist($image);
+        $this->em->flush();
+    }
+
+    // READ
+    public function getById($id){
+        return $this->repo->find($id);
+    }
+
     // REMOVE
     public function remove(TrickImage $trickImage)
     {

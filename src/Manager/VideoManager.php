@@ -14,14 +14,12 @@ use Doctrine\ORM\EntityManager;
 class VideoManager
 {
     private $em;
-    private $repo;
 
     public function __construct(
         EntityManager $entityManager)
     {
         // DB
         $this->em = $entityManager;
-        $this->repo = $this->em->getRepository(Video::class);
     }
 
     // REMOVE

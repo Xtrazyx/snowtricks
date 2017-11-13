@@ -103,7 +103,7 @@ class EditTrickAction
         {
             //Managing deleted fileInput fields : remove videos when inputField is removed
             foreach($existingVideos as $video){
-                if($trick->getVideos()->contains($video) == false){
+                if($trick->getVideos()->contains($video) === false){
                     $trick->removeVideo($video);
                     $videoManager->remove($video);
                 }
