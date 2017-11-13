@@ -1,11 +1,11 @@
 var $collectionImageHolder;
 
 // setup an "add a tag" link
-var $addImageLink = $('<a href="#" class="btn btn-default">Ajouter une image</a>');
-var $newLinkDiv = $('<div></div>').append($addImageLink);
+var $addImageLink = $('<a href="#" class="btn btn-default">Image supplémentaire</a>');
+var $newLinkDiv = $('<div class="form-group"></div>').append($addImageLink);
 
 jQuery(document).ready(function() {
-    // Get the ul that holds the collection of tags
+    // Get the collection
     $collectionImageHolder = $('div#trick_trickImages');
 
     // add the add image to the collection
@@ -51,7 +51,7 @@ function addImageForm($collectionImageHolder, $newLinkDiv) {
     $collectionImageHolder.data('index', index + 1);
 
     // Display the form in the page in an div, before the "Add a tag" link div
-    var $newFormDiv = $('<div></div>').append(newForm);
+    var $newFormDiv = $('<div class="form-group"></div>').append(newForm);
     if($('div.img-form').length > 0){
         addDelImageLink($newFormDiv);
     }

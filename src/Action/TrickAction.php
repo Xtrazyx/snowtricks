@@ -52,9 +52,12 @@ class TrickAction
         }else{
             $posts = $this->postManager->getAllByTrick($trick->getId());
 
+            $dump = ob_get_contents();
+
             $content = $this->twig->render('trick.html.twig', array(
                 'trick' => $trick,
                 'posts' => $posts,
+                'dump' => $dump,
                 'form' => $form->createView()
             ));
         }

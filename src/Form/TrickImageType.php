@@ -20,7 +20,7 @@ class TrickImageType extends AbstractType
     {
         $builder
             ->add('fileName', FileType::class, array(
-                'label' => 'Ajouter une image'
+                'label' => 'Image'
             ))
         ;
     }

@@ -1,0 +1,96 @@
+/* Modal Content */
+#lightBoxModal1 > .modal-content, #lightBoxModal2 > .modal-content {
+    margin: 75px auto;
+    text-align: center;
+    background-color: transparent;
+}
+
+#lightBoxModal1 > .modal-content{
+    max-width: 1200px;
+}
+
+#lightBoxModal2 > .modal-content{
+    max-width: 650px;
+}
+
+.modal-content img{
+    max-width: 90%;
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.delete{
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    padding: 3px;
+    border-radius: 3px;
+    background-color: white;
+    border: solid 1px grey;
+}
+
+.delete:hover,
+.delete:focus{
+    cursor: pointer;
+    background-color: #aacd4e;
+}
+
+.close:hover,
+.close:focus {
+    color: #B0413E;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: #B0413E;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.prev {
+    left: 0;
+}
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+img.hover-shadow {
+    transition: 0.3s
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}

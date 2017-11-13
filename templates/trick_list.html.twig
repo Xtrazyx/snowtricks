@@ -1,31 +1,46 @@
 {# LISTE DES FIGURES #}
-<ul>
-  {% for trick in tricks %}
+{% for trick in tricks %}
 
+<div class="trick-item"
+    {% for image in trick.trickImages %}
+      {% if loop.first %}
+        style="background: url('{{ asset(image.url) }}') no-repeat;background-size: cover;background-position: top 20% left 20%"
+      {% endif %}
+    {% endfor %}
+>
+
+  {# INFO #}
+  <div class="info">
     {# NOM #}
-    <li>{{ trick.name }}</li>
-    <li>{{ trick.group.name }}</li>
-    <li><a href="{{ path('trick', {'id': trick.id}) }}">Voir le détail</a></li>
+    <div class="name">
+      <a href="{{ path('trick', {'id': trick.id}) }}">
+        {{ trick.name }}
+      </a>
+    </div>
 
-    {% if is_granted('ROLE_USER') %}
-      <li><a href="{{ path('edit_trick', {'id': trick.id}) }}">Editer</a></li>
-      <li><a href="{{ path('delete_trick', {'id': trick.id}) }}">Supprimer</a></li>
-    {% endif %}
+    {# GROUPE #}
+    <div class="group">
+      <span>{{ trick.group.name }}</span>
+    </div>
+  </div>
 
-    {# IMAGES #}
-    <ul>
-      {% for image in trick.trickImages %}
-        <li>{{ image.fileName }}</li>
-        <li><img src="{{ asset(image.url) }}"></li>
-      {% endfor %}
-    </ul>
+  {% if is_granted('ROLE_USER') %}
+    <div class="actions">
+      {# EDIT #}
+      <div class="edit">
+        <a href="{{ path('edit_trick', {'id': trick.id}) }}">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+      </div>
 
-    {# VIDEOS #}
-    <ul>
-      {% for video in trick.videos %}
-        <li>{{ video.sourceId }}</li>
-      {% endfor %}
-    </ul>
+      {# DELETE - TODO Modal for confirmation or action confirmation #}
+      <div class="delete">
+        <a href="{{ path('delete_trick', {'id': trick.id}) }}">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  {% endif %}
+</div>
 
-  {% endfor %}
-</ul>
+{% endfor %}

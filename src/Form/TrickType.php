@@ -12,7 +12,6 @@ use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,22 +34,22 @@ class TrickType extends AbstractType
                 'choice_label' => 'name'
             ))
             ->add('trickImages', CollectionType::class, array(
+                'label' => false,
+                'required' => false,
                 'entry_type' => TrickImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'delete_empty' => true,
                 'entry_options' => array('label' => false, 'attr'=>array('class'=>'img-form')),
                 'by_reference' => false
             ))
             ->add('videos', CollectionType::class, array(
+                'label' => 'Vidéos : copiez l\'identifiant à la fin de l\'url de la vidéo. YouTube ou DailyMotion.',
                 'entry_type' => VideoType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'delete_empty' => true,
                 'entry_options' => array('label' => false, 'attr'=>array('class'=>'video-form')),
                 'by_reference' => false
             ))
-            ->add('envoyer', SubmitType::class)
         ;
     }
 

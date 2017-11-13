@@ -19,7 +19,7 @@ class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sourceId', TextType::class, array('label' => 'Ajouter une vidéo'))
+            ->add('sourceId', TextType::class, array('label' => 'Vidéo'))
         ;
     }
 

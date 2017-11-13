@@ -8,10 +8,13 @@
 
 namespace App\Action;
 
-use App\Form\TrickType;
+use App\Form\EditTrickType;
 use App\Manager\GroupManager;
+use App\Manager\TrickImageManager;
 use App\Manager\TrickManager;
+use App\Manager\VideoManager;
 use App\Traits\RedirectTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -23,48 +26,90 @@ class EditTrickAction
 {
     use RedirectTrait;
 
-    private $twig;
-    private $trickManager;
-    private $groupManager;
-    private $formFactory;
-    private $request;
     private $router;
 
-    public function __construct(
-        Environment $twig,
-        TrickManager $trickManager,
-        GroupManager $groupManager,
-        FormFactory $formFactory,
-        RequestStack $requestStack,
-        Router $router
-    )
+    public function __construct(Router $router)
     {
-        $this->twig = $twig;
-        $this->trickManager = $trickManager;
-        $this->groupManager = $groupManager;
-        $this->formFactory = $formFactory;
-        $this->request = $requestStack->getCurrentRequest();
         $this->router = $router;
     }
 
     /**
      * @Route("/edit_trick/{id}", name="edit_trick")
+     *
+     * @param Environment $twig
+     * @param TrickManager $trickManager
+     * @param TrickImageManager $trickImageManager
+     * @param VideoManager $videoManager
+     * @param GroupManager $groupManager
+     * @param FormFactory $formFactory
+     * @param RequestStack $requestStack
+     * @param $id
+     *
+     * @return Response
      */
-    public function __invoke($id)
+    public function __invoke(
+        Environment $twig,
+        TrickManager $trickManager,
+        TrickImageManager $trickImageManager,
+        VideoManager $videoManager,
+        GroupManager $groupManager,
+        FormFactory $formFactory,
+        RequestStack $requestStack,
+        $id)
     {
-        $trick = $this->trickManager->getById($id);
-        $groups = $this->groupManager->getAll();
-        $form = $this->formFactory->create(
-            TrickType::class,
+        $trick = $trickManager->getById($id);
+        $request = $requestStack->getCurrentRequest();
+
+        if(!$trick) {
+            return new Response(
+                $twig->render(
+                    '@Twig/Exception/error.html.twig',
+                    array(
+                        'status_code' => '404',
+                        'status_text' => 'La page demandée n\'existe pas'
+                    )
+                )
+            );
+        }
+
+
+        // \/--- #----------- BAD --- BAD --- BAD --- BAD --- TODO CHANGE ALL THAT MANAGEMENT
+        // # Note : the current image management system is enough for a small amount of images
+        // # but if the amount was to be high we'll need to implement a real image library system
+
+        // +Images
+        $existingImages = new ArrayCollection();
+        foreach($trick->getTrickImages() as $key => $image){
+            $existingImages[$key] = $image;
+        }
+        // /\--- #---------------------------------------------------------------------------
+
+        // Managing deleted fileInput fields : making a temporary collection for comparison
+        // Videos
+        $existingVideos = new ArrayCollection();
+        foreach($trick->getVideos() as $video){
+            $existingVideos->add($video);
+        }
+
+        $groups = $groupManager->getAll();
+        $form = $formFactory->create(
+            EditTrickType::class,
             $trick, array(
             'groups' => $groups));
 
-        $form->handleRequest($this->request);
+        $form->handleRequest($request);
 
         if($form->isValid() && $form->isSubmitted())
         {
-            $trick = $form->getData();
-            $this->trickManager->update();
+            //Managing deleted fileInput fields : remove videos when inputField is removed
+            foreach($existingVideos as $video){
+                if($trick->getVideos()->contains($video) == false){
+                    $trick->removeVideo($video);
+                    $videoManager->remove($video);
+                }
+            }
+
+            $trickManager->update();
 
             return $this->redirectToRoute(
                 'trick', array(
@@ -72,9 +117,10 @@ class EditTrickAction
             ));
         }
 
-        return new Response($this->twig->render(
+        return new Response($twig->render(
             'edit_trick.html.twig', array(
-            'form' => $form->createView()
+                'form' => $form->createView(),
+                'images' => $existingImages
         )));
     }
 

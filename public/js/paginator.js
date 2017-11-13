@@ -13,6 +13,10 @@ jQuery(document).ready(function() {
                 startPage: currentPage,
                 totalPages: totalPages,
                 hideOnlyOnePage: true,
+                first: '<<',
+                prev: '<',
+                last: '>>',
+                next: '>',
                 onPageClick: function (event, page) {
                     // Grab content page from Ajax request
                     $.ajax({

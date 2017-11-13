@@ -17,10 +17,15 @@
           Snowtricks
         {% endblock %}
       </title>
+
       {% block stylesheets %}
-        {# CDN #}
+        {# CDN BOOTSTRAP #}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        {# FONT AWESOME #}
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+
         {# BUILDIN CSS #}
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
       {% endblock %}
@@ -28,58 +33,77 @@
 
     <body>
 
-      {# MENU #}
-      <menu>
-        {% block menu %}
-          <a href="{{ path('index') }}">Accueil</a>
+      <header>
+        <div class="logo">
+          <a href="{{ path('index') }}">
+            <img src="{{ asset('img/logo_snowtricks.png') }}" alt="snowtricks">
+          </a>
+        </div>
 
-          {% if is_granted('ROLE_USER') %}
-            <a href="{{ path('add_trick') }}">Ajouter une figure</a>
-          {% endif %}
+        {# MENU #}
+        <menu>
+          {% block menu %}
+            <a href="{{ path('index') }}">Accueil</a>
 
-          {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <a href="{{ path('register') }}">S'enregistrer</a>
-            <a href="{{ path('login') }}">Se connecter</a>
-          {% endif %}
+            {% if is_granted('ROLE_USER') %}
+              <a href="{{ path('add_trick') }}">Ajouter une figure</a>
+            {% endif %}
 
-          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <a href="{{ path('logout') }}">Se déconnecter</a>
-          {% endif %}
+            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+              <a href="{{ path('register') }}">S'inscrire</a>
+              <a href="{{ path('login') }}">Se connecter</a>
+            {% endif %}
 
-          {% if is_granted('ROLE_USER') %}
-            <img src="{{ asset(app.user.avatar.url) }}">
-          {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+              <a href="{{ path('logout') }}">Se déconnecter</a>
+              <a href="{{ path('profile') }}">Modifier mon profil</a>
+            {% endif %}
 
-        {% endblock %}
-      </menu>
+            {% if is_granted('ROLE_USER') %}
+              <div class="user-module">
+                <img src="{{ asset(app.user.avatar.url) }}">
+                <div class="username">{{ app.user.firstName }} {{ app.user.lastName }}</div>
+              </div>
+            {% endif %}
+
+          {% endblock %}
+        </menu>
+      </header>
 
       {# FLASH #}
-      {% for type, messages in app.session.flashbag.all %}
-        <div class="alert alert-{{ type }}">
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-        </div>
-      {% endfor %}
-
-      {# Children Content #}
-      <div class="content">
-        {% block content %}
-        {% endblock %}
+      <div class="content-flash">
+        {% for type, messages in app.session.flashbag.all %}
+          <div class="alert alert-{{ type }}">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
       </div>
 
-      <footer>
-        JHD © 2017
-      </footer>
+      {# CONTENT #}
+      {% block content %}
+      {% endblock %}
+
+      {# FOOTER #}
+      <div class="footer">
+          JHD © 2017
+      </div>
 
       {# Ajax Loading Screen #}
       <div class="loader"></div>
 
       {% block javascripts %}
+        {# CDN JQUERY #}
         <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+
+        {# CDN BOOTSRAP #}
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        {# BUILDIN JS #}
         <script src="{{ asset('js/ajax_loading_screen.js') }}"></script>
       {% endblock %}
     </body>

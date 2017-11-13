@@ -1,14 +1,14 @@
 var $collectionVideoHolder;
 
 // setup an "add a tag" link
-var $addVideoLink = $('<a href="#" class="btn btn-default">Ajouter une vidéo</a>');
-var $newLinkVideoDiv = $('<div></div>').append($addVideoLink);
+var $addVideoLink = $('<a href="#" class="btn btn-default">Vidéo supplémentaire</a>');
+var $newLinkVideoDiv = $('<div class="form-group"></div>').append($addVideoLink);
 
 jQuery(document).ready(function() {
-    // Get the ul that holds the collection of tags
+    // Get the the collection
     $collectionVideoHolder = $('div#trick_videos');
 
-    // add the add image to the collection
+    // add the add video to the collection
     $collectionVideoHolder.append($newLinkVideoDiv);
     
     // count the current form inputs we have (e.g. 2), use that as the new
@@ -51,7 +51,7 @@ function addVideoForm($collectionVideoHolder, $newLinkVideoDiv) {
     $collectionVideoHolder.data('index', index + 1);
 
     // Display the form in the page in an div, before the "Add a tag" link div
-    var $newFormDiv = $('<div></div>').append(newVideoForm);
+    var $newFormDiv = $('<div class="form-group"></div>').append(newVideoForm);
     if($('div.video-form').length > 0){
         addDelVideoLink($newFormDiv);
     }

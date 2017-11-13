@@ -1,9 +1,370 @@
-/* MENU ---------------------------------------------- */
-menu a{
-    padding: 15px;
+/* LOGO ---------------------------------------------- */
+.logo{
+    position: fixed;
+    top: 20px;
+    left: 50px;
 }
 
-/* AJAX LOADING SCREEN ------------------------------- */
+/* MENU ---------------------------------------------- */
+menu{
+    flex-grow: 1;
+    width: 90%;
+    margin: 0;
+    padding: 0 120px 0 0;
+    text-align: right;
+}
+
+menu a, menu a:visited{
+    display: inline-block;
+    padding: 10px;
+    height: 100%;
+    font-weight: bold;
+}
+
+menu a:hover{
+    text-decoration: none;
+    background-color: #b2b9be;
+    color: white;
+}
+
+.user-module{
+    top: 10px;
+    right: 30px;
+    position: absolute;
+    text-align: right;
+}
+
+.user-module img{
+    height: 60px;
+    width: 60px;
+    margin-top: 10px;
+    border-radius: 100%;
+    border: solid 2px lightgrey;
+}
+
+/* BASE / GENERAL ------------------------------------ */
+.content, .content-flash, .content-full{
+    margin: auto;
+    max-width: 1024px;
+}
+
+.content-flash{
+    margin-top: 30px;
+}
+
+.content-full{
+    height: 100vh;
+}
+
+header{
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    height: 40px;
+    border-bottom: #f7f5f5 solid 2px;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+}
+
+footer{
+    position: relative;
+}
+
+h1{
+    margin: 10px 0 10px 0;
+    padding-bottom: 10px;
+    color: #656565;
+    border-bottom: #f7f5f5 solid 2px;
+}
+
+.return{
+    text-align: left;
+}
+
+.instruction{
+    font-style: italic;
+    font-size: 110%;
+    color: #727272;
+}
+
+/* SECTIONS ------------------------------------------ */
+.section-figure, .section-go{
+    width: 100%;
+    text-align: center;
+}
+
+/* TRICK LIST ---------------------------------------- */
+.section-figure{
+    background: url('../img/fond_montagne.jpg') no-repeat;
+    background-size: cover;
+    padding: 0 20px 20px 20px;
+}
+
+#trick_list{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.trick-item{
+    display: flex;
+    height: 150px;
+    min-width: 400px;
+    align-content: space-between;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+    box-shadow: #959ca1 2px 2px 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.trick-item:hover{
+    box-shadow: #333333 3px 3px 5px;
+}
+
+.info{
+    flex-grow: 1;
+    position: relative;
+    top: -30px;
+    align-self: center;
+    padding-left: 30px;
+    text-align: left;
+}
+
+.mini{
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+    border: dotted 2px lightgrey;
+}
+
+.name{
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.group{
+    position: relative;
+    left: -15px;
+}
+
+.group, .username{
+    font-size: 110%;
+    color: #878e92;
+}
+
+.group span, .name > a{
+    padding: 5px;
+    margin: 5px;
+    background-color: rgba(244, 242, 243, 0.88);
+    box-shadow: #959ca1 2px 2px 4px;
+}
+
+.name > a:visited, .name > a{
+    color: #4f616d;
+    text-decoration: none;
+}
+
+.name a:hover{
+    color: #2ca02c;
+    text-decoration: none;
+}
+
+.actions{
+    display: flex;
+    font-size: 120%;
+    flex-flow: column;
+    align-content: space-between;
+    align-items: flex-end;
+    background-color: rgba(244, 242, 243, 0.7);
+    padding: 5px;
+}
+
+.edit{
+    flex-grow: 1;
+}
+
+/* SECTION CALL TO ACTION --------------------------------------- */
+.section-go{
+    height: 250px;
+    background: url('../img/snow_fond.jpg') no-repeat center;
+    padding: 20px;
+}
+
+.title-go{
+    color: #44283e;
+}
+
+.btn-zone{
+    padding-top: 15px;
+}
+
+body > section.section-go > div > div > a{
+    font-size: 120%;
+}
+
+/* TRICK -------------------------------------------------------- */
+.trick-detail{
+    position: relative;
+    padding: 10px;
+    margin: 35px 0 10px 0;
+    background-color: rgba(244, 242, 243, 0.7);
+    border: #e2e2e2 solid 2px;
+}
+
+/* + DETAILS ---------------------------------------------------- */
+.round-thumb{
+    display: inline-block;
+    position: absolute;
+    top: -25px;
+    left: 25px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: dotted 2px #e2e2e2;
+}
+
+.round-thumb img {
+    width: auto;
+    height: 100%;
+    margin-left: -25%;
+}
+
+.trick-detail .name{
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.trick-detail .group{
+    font-size: 150%;
+}
+
+.trick-detail .name a{
+    font-size: 80%;
+}
+
+.description{
+    font-size: 120%;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.2);;
+    margin: 10px;
+    padding: 10px;
+    border: solid 1px #e2e2e2;
+    border-radius: 5px;
+}
+
+.img-container{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.img-block{
+    margin: 10px;
+}
+
+.trick-detail h2{
+    text-align: left;
+    color: #656565;
+    border-bottom: solid 1px #e2e2e2;
+    padding-left: 10px;
+}
+
+/* + POSTS -------------------------------------------------------- */
+.post-zone{
+    margin-top: 25px;
+}
+
+.post-container{
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    border: solid 1px #e2e2e2;
+    border-radius: 5px;
+}
+
+.avatar{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: dotted 2px #e2e2e2;
+    float: left;
+}
+
+.avatar img {
+    width: auto;
+    height: 100%;
+}
+
+.infos{
+    display: inline-block;
+    color: #767676;
+}
+
+.post-content{
+    font-size: 110%;
+}
+
+#no_post{
+    margin-top: 25px;
+    font-size: 120%;
+}
+
+/* LOGIN -------------------------------------------------------- */
+.login-form, .large-form{
+    margin: auto;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: solid 1px #e2e2e2;
+    border-radius: 5px;
+}
+
+.login-form{
+    max-width: 500px;
+}
+
+.lost-pass{
+    margin-top: 25px;
+    font-size: 120%;
+}
+
+.login-form .form-group, .large-form{
+    text-align: left;
+}
+
+/* REGISTER ----------------------------------------------------- */
+#register_avatar > div > label{
+    font-style: italic;
+    font-size: 90%;
+    color: #727272;
+}
+
+/* ADD ---------------------------------------------------------- */
+#trick > div:nth-child(5) > label{
+    font-style: italic;
+    font-size: 90%;
+    color: #727272;
+}
+
+/* FOOTER ------------------------------------------------------- */
+.footer{
+    position: fixed;
+    font-weight: bold;
+    color: lightgrey;
+    bottom: 15px;
+    left: 15px;
+}
+
+/* AJAX LOADING SCREEN ------------------------------------------ */
 .loader{
     display: none;
     position: fixed;

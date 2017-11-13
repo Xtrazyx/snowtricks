@@ -1,11 +1,14 @@
 {# POST #}
-<div>
-  <div>
+<div class="post-container">
+  <div class="avatar">
+    <img src="{{ asset(post.user.avatar.url) }}" alt="{{ post.user.avatar.alt }}"/>
+  </div>
+  <div class="infos">
     <span>{{ post.user.firstName }}&nbsp;{{ post.user.lastName }}</span>
     &nbsp;-&nbsp;
     <span>{{ post.dateCreation|date }}</span>
   </div>
-  <div>
+  <div class="post-content">
     {{ post.content }}
   </div>
 </div>
