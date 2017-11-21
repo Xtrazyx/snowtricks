@@ -56,10 +56,16 @@ class ProfileAction
         $user = $tokenStorage->getToken()->getUser();
         $form = $formFactory->create(ProfileType::class, $user);
 
+        $currentAvatar = $user->getAvatar();
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
+            if($form->get('avatar') === null){
+                $user->setAvatar($currentAvatar);
+            }
+
             $userManager->update();
 
             $this->redirectToRoute('index');

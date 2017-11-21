@@ -1,0 +1,50 @@
+{# videos LIBRARY #}
+<div class="modal-header">
+  <button type="button" class="close" data-toggle="modal" data-target="#libVidModal">&times;</button>
+  <h2 class="modal-title" id="myModalLabel">Bibliothèque de vidéos pour {{ trick.name }}</h2>
+  <a id="addVideo" class="btn btn-default" href="#">Ajouter une vidéo</a>
+</div>
+
+<div class="lib-container">
+  <div class="vid-list">
+    {% for video in trick.videos %}
+      {{ include('lib_video_item.html.twig', {'video': video}) }}
+    {% endfor %}
+  </div>
+</div>
+
+{# Modal pour le formulaire d'ajout de vidéo #}
+<div id="ModalVideoAdd" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      {# FORM #}
+      <form id="addVideoForm" class="form-horizontal" enctype="multipart/form-data">
+
+        {# HIDDEN FIELDS #}
+        <input type="hidden" name="trick_id" id="trick_id" value="{{ trick.id }}">
+        <input type="hidden" name="actionType" id="actionType" value="create">
+
+        {# Title #}
+        <div class="modal-header">
+          <button type="button" class="close" data-toggle="modal" data-target="#ModalVideoAdd"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Ajouter une video<span id="date"></span></h4>
+        </div>
+
+        {# Content #}
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="sourceId" class="col-sm-8 control-label">Video Youtube ou Dailymotion (ID à la fin de l'URL)</label>
+            <div class="col-sm-4">
+              <input type="text" name="sourceId" class="form-control" id="sourceId">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="submitVideo">Enregistrer</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

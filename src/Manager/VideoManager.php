@@ -14,15 +14,42 @@ use Doctrine\ORM\EntityManager;
 class VideoManager
 {
     private $em;
+    private $repo;
 
     public function __construct(
         EntityManager $entityManager)
     {
         // DB
         $this->em = $entityManager;
+        $this->repo = $entityManager->getRepository(Video::class);
     }
 
-    // REMOVE
+    // CREATE
+    public function new()
+    {
+        return new Video();
+    }
+
+    public function persist(Video $video)
+    {
+        $this->em->persist($video);
+        $this->em->flush();
+    }
+
+    // READ
+    public function getById($id)
+    {
+        return $this->repo->find($id);
+    }
+
+
+    // UPDATE
+    public function update()
+    {
+        $this->em->flush();
+    }
+
+    // DELETE
     public function remove(Video $video)
     {
         $this->em->remove($video);

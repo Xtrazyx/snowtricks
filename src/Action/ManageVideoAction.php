@@ -8,29 +8,28 @@
 
 namespace App\Action;
 
-use App\Manager\TrickImageManager;
 use App\Manager\TrickManager;
+use App\Manager\VideoManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class ManageImageAction
+class ManageVideoAction
 {
     /**
-     * @Route("/manage_image", name="manage_image")
+     * @Route("/manage_video", name="manage_video")
      *
      * @param RequestStack $requestStack
      * @param TrickManager $trickManager
-     * @param TrickImageManager $trickImageManager
+     * @param VideoManager $videoManager
      * @param Environment $twig
      * @return Response
      */
     public function __invoke(
         RequestStack $requestStack,
         TrickManager $trickManager,
-        TrickImageManager $trickImageManager,
+        VideoManager $videoManager,
         Environment $twig
     )
     {
@@ -38,31 +37,30 @@ class ManageImageAction
         $request = $requestStack->getCurrentRequest();
         $actionType = $request->get('actionType');
 
-        // Add new image to the trick
+        // Add new video to the trick
         if($actionType == 'create'){
-            $image = $trickImageManager->new();
-            $file = new UploadedFile($request->files->get('imageFile'),'temp');
+            $video = $videoManager->new();
 
-            $image->setTrick($trickManager->getById($request->request->get('trick_id')));
-            $image->setFilename($file);
-            $trickImageManager->persist($image);
+            $video->setTrick($trickManager->getById($request->request->get('trick_id')));
+            $video->setSourceId($request->request->get('sourceId'));
+            $videoManager->persist($video);
 
             return new Response($twig->render(
-                'lib_image_item.html.twig', array(
-                    'image' => $image
+                'lib_video_item.html.twig', array(
+                    'video' => $video
             )));
         }
 
         // Delete image
         if($actionType == 'delete'){
-            $image = $trickImageManager->getById($request->get('imageId'));
+            $video = $videoManager->getById($request->get('videoId'));
             // Storing image id for confirmation message
-            $deleteImageId = array('deleted_image_id' => $image->getId());
+            $deleteVideoId = array('deleted_video_id' => $video->getId());
 
-            $image->getTrick()->removeTrickImage($image);
-            $trickImageManager->remove($image);
+            $video->getTrick()->removeVideo($video);
+            $videoManager->remove($video);
 
-            return new Response(json_encode($deleteImageId));
+            return new Response(json_encode($deleteVideoId));
         }
 
         return new Response($twig->render(
