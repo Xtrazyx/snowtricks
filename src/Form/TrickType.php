@@ -26,7 +26,10 @@ class TrickType extends AbstractType
                 'label' => 'Nom de la figure'
             ))
             ->add('description', TextareaType::class, array(
-                'label' => 'Description'
+                'label' => 'Description',
+                'attr' => array(
+                    'rows' => 10
+                )
             ))
             ->add('group', ChoiceType::class, array(
                 'label' => 'Groupe',
@@ -39,7 +42,10 @@ class TrickType extends AbstractType
                 'entry_type' => TrickImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'entry_options' => array('label' => false, 'attr'=>array('class'=>'img-form')),
+                'entry_options' => array(
+                    'label' => false,
+                    'attr'=>array(
+                        'class'=>'img-form')),
                 'by_reference' => false
             ))
             ->add('videos', CollectionType::class, array(

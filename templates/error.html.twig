@@ -1,0 +1,9 @@
+{% block content %}
+  <div class="content">
+
+    {% if error.code == '404' %}
+      <p>Oups. La page demandée n'existe pas.</p>
+    {% endif %}
+
+  </div>
+{% endblock %}

@@ -1,31 +1,47 @@
 {% extends "base.html.twig" %}
 
-{#{% form_theme form 'image_file_widget.html.twig' %}#}
+{% block stylesheets %}
+  {{ parent() }}
+
+  {# Lightbox css #}
+  <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}">
+{% endblock %}
 
 {% block content %}
   <section class="section-figure">
     <div class="content content-full">
       <div class="large-form">
         {# FORM #}
-        <h1>Edition d'une figure</h1>
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-default">Envoyer</button>
-        {{ form_end(form) }}
+        <h1>Edition de la figure : {{ trick.name }}</h1>
+
+        <div class="form-group">
+          <button class="btn btn-default" data-toggle="modal" data-target="#libModal">Gérer les images</button>
+          <button class="btn btn-default" data-toggle="modal" data-target="#libVidModal">Gérer les vidéos</button>
+        </div>
+
+        {{ include('form.html.twig', {'form': form}) }}
+
       </div>
     </div>
   </section>
+
+  <div id="libModal" class="modal fade" role="dialog">
+    <div class="modal-content">
+      {{ include('lib_image.html.twig', {'trick': trick}) }}
+    </div>
+  </div>
+
+  <div id="libVidModal" class="modal fade" role="dialog">
+    <div class="modal-content">
+      {{ include('lib_video.html.twig', {'trick': trick}) }}
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
-  <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-      crossorigin="anonymous">
-  </script>
-  <script
-      src="{{ asset('js/edit_video_form_adder.js') }}">
-  </script>
+  <script src="{{ asset('js/lightbox.js') }}"></script>
+  <script src="{{ asset('js/image.js') }}"></script>
+  <script src="{{ asset('js/video.js') }}"></script>
 {% endblock %}

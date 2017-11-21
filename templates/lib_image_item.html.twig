@@ -1,0 +1,10 @@
+<div class="img-item" id="img_{{ image.id }}">
+  <img src="{{ asset(image.url) }}">
+
+  {# DELETE #}
+  <span>
+    <a href="#" onclick="deleteImage('{{ image.id }}')">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </a>
+  </span>
+</div>

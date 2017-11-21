@@ -1,0 +1,49 @@
+{# IMAGE LIBRARY #}
+<div class="modal-header">
+  <button type="button" class="close" data-toggle="modal" data-target="#libModal"><span aria-hidden="true">&times;</span></button>
+  <h2 class="modal-title" id="myModalLabel">Bibliothèque d'image pour {{ trick.name }}</h2>
+  <a id="addImage" class="btn btn-default" href="#">Ajouter une image</a>
+</div>
+
+<div class="lib-container">
+  <div class="img-list">
+    {% for image in trick.trickImages %}
+      {{ include('lib_image_item.html.twig', {'image': image}) }}
+    {% endfor %}
+  </div>
+</div>
+
+{# Modal pour le formulaire d'ajout d'images #}
+<div id="ModalImageAdd" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      {# FORM #}
+      <form id="addImageForm" class="form-horizontal" enctype="multipart/form-data">
+
+        {# HIDDEN FIELDS #}
+        <input type="hidden" name="trick_id" id="trick_id" value="{{ trick.id }}">
+        <input type="hidden" name="actionType" id="actionType" value="create">
+
+        {# Titre #}
+        <div class="modal-header">
+          <button type="button" class="close" data-toggle="modal" data-target="#ModalImageAdd">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Ajouter une image<span id="date"></span></h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="imageFile" class="col-sm-4 control-label">Fichier image</label>
+            <div class="col-sm-8">
+              <input type="file" name="imageFile" class="form-control" id="imageFile">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="submitImage">Enregistrer</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -38,4 +38,6 @@ security:
         - { path: ^/add_trick, roles: ROLE_USER }
         - { path: ^/post, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/manage_image, roles: ROLE_USER }
+        - { path: ^/manage_video, roles: ROLE_USER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
