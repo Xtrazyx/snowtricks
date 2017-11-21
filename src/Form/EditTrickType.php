@@ -15,7 +15,10 @@ class EditTrickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->remove('trickImages');
+        $builder
+            ->remove('trickImages')
+            ->remove('videos')
+        ;
     }
 
     public function getParent()

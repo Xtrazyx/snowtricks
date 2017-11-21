@@ -21,10 +21,10 @@ class AvatarType extends AbstractType
     {
         $builder
             ->add('fileName', FileType::class, array(
-                'label' => 'Choisissez une image carrée. 100*100px maximum.',
+                'label' => 'Choisissez une image carrée. 150*150px maximum.',
                 'constraints' => new Image(array(
-                    'maxWidth' => 100,
-                    'maxHeight' => 100,
+                    'maxWidth' => 150,
+                    'maxHeight' => 150,
                     'allowLandscape' => false,
                     'allowPortrait' => false
                 ))

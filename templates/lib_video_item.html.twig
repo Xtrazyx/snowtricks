@@ -1,0 +1,27 @@
+<div class="img-item" id="vid_{{ video.id }}">
+
+  {# YOUTUBE #}
+  {% if video.sourceId|length == 11 %}
+    <img
+        width="210"
+        src="https://i.ytimg.com/vi/{{ video.sourceId }}/hqdefault.jpg"
+    />
+
+  {# DAILYMOTION #}
+  {% elseif video.sourceId|length == 7 %}
+    <img
+        width="210"
+        src="https://www.dailymotion.com/thumbnail/video/{{ video.sourceId }}"
+    />
+
+  {% else %}
+    <p>L'ID de la vidéo n'a pas le bon format.</p>
+  {% endif %}
+
+  {# DELETE #}
+  <span>
+    <a href="#" onclick="deleteVideo('{{ video.id }}')">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </a>
+  </span>
+</div>

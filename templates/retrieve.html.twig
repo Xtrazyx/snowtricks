@@ -9,11 +9,8 @@
           Indiquer votre adresse email ci-dessous. Vous recevrez un message, veuillez en suivre les instructions.
         </p>
 
-        {# FORM #}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-default">Envoyer</button>
-        {{ form_end(form) }}
+        {{ include('form.html.twig', {'form': form}) }}
+
       </div>
     </div>
   </section>

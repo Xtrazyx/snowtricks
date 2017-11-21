@@ -5,7 +5,11 @@
     background-color: transparent;
 }
 
-#lightBoxModal1 > .modal-content{
+#libModal > .modal-content, #libVidModal > .modal-content{
+    margin: 75px auto;
+}
+
+#lightBoxModal1 > .modal-content, #libModal > .modal-content, #libVidModal > .modal-content{
     max-width: 1200px;
 }
 
@@ -22,7 +26,7 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    font-size: 15px;
+    font-size: 30px;
     font-weight: bold;
 }
 

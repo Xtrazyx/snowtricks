@@ -72,18 +72,6 @@ class EditTrickAction
             );
         }
 
-
-        // \/--- #----------- BAD --- BAD --- BAD --- BAD --- TODO CHANGE ALL THAT MANAGEMENT
-        // # Note : the current image management system is enough for a small amount of images
-        // # but if the amount was to be high we'll need to implement a real image library system
-
-        // +Images
-        $existingImages = new ArrayCollection();
-        foreach($trick->getTrickImages() as $key => $image){
-            $existingImages[$key] = $image;
-        }
-        // /\--- #---------------------------------------------------------------------------
-
         // Managing deleted fileInput fields : making a temporary collection for comparison
         // Videos
         $existingVideos = new ArrayCollection();
@@ -103,7 +91,7 @@ class EditTrickAction
         {
             //Managing deleted fileInput fields : remove videos when inputField is removed
             foreach($existingVideos as $video){
-                if($trick->getVideos()->contains($video) == false){
+                if($trick->getVideos()->contains($video) === false){
                     $trick->removeVideo($video);
                     $videoManager->remove($video);
                 }
@@ -120,7 +108,7 @@ class EditTrickAction
         return new Response($twig->render(
             'edit_trick.html.twig', array(
                 'form' => $form->createView(),
-                'images' => $existingImages
+                'trick' => $trick
         )));
     }
 

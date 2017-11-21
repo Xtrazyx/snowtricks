@@ -7,11 +7,15 @@ function openModal(type){
         $('#lightBoxModal2').modal('show');
     }
 
+    if(type === 'lib'){
+        $('#libModal').modal('show');
+    }
 }
 
 function closeModal(){
     $('#lightBoxModal1').modal('hide');
     $('#lightBoxModal2').modal('hide');
+    $('#libModal').modal('hide');
 }
 
 var slideIndex = 1;

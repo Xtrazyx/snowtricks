@@ -124,16 +124,16 @@
         {% endif %}
 
         {# POST LIST #}
+        <div class="post-zone">
+          <div id="new_post"></div>
         {% if posts is empty %}
           <p id="no_post">Il n'y a pas encore de message.</p>
         {% else %}
-          <div class="post-zone">
-            <div id="new_post"></div>
             {% for post in posts %}
               {{ include('post.html.twig', {'post': post}) }}
             {% endfor %}
-          </div>
         {% endif %}
+        </div>
       </div>
   </section>
 
