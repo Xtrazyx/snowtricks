@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="73ae44e9-8dfb-4b00-a1ec-c1d78fc1bbff" name="Default" comment="">
+    <list default="true" id="73ae44e9-8dfb-4b00-a1ec-c1d78fc1bbff" name="Default" comment="Project data and Readme v2">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/Xtrazyx.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
@@ -25,8 +25,8 @@
       <file leaf-file-name="base_tricks.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/project_data/base_tricks.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="603">
+              <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -474,7 +474,7 @@
       <workItem from="1510586102056" duration="6220000" />
       <workItem from="1511309672439" duration="8189000" />
       <workItem from="1511343164051" duration="651000" />
-      <workItem from="1511343866915" duration="9495000" />
+      <workItem from="1511343866915" duration="9781000" />
     </task>
     <task id="LOCAL-00001" summary="CSS HTML JS Front Implementation">
       <created>1510584186551</created>
@@ -532,11 +532,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511353283690</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Project data and Readme v2">
+      <created>1511353965596</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1511353965596</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56795000" />
+    <option name="totallyTimeSpent" value="57081000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -576,7 +583,8 @@
     <MESSAGE value=".idea removed from repository" />
     <MESSAGE value="css responsive" />
     <MESSAGE value="Project data and Readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Project data and Readme" />
+    <MESSAGE value="Project data and Readme v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project data and Readme v2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -974,8 +982,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/project_data/base_tricks.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="603">
+          <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding />
         </state>
       </provider>
