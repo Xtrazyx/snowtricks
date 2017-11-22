@@ -1,9 +1,6 @@
 trick1:
     name: 'Noseblunt'
-    description: "A slide performed where the rider's trailing foot passes over the rail on approach,
-    with their snowboard traveling perpendicular and leading foot directly above the rail or other obstacle (like a noseslide).
-    When performing a frontside bluntslide, the snowboarder is facing uphill.
-    When performing a backside bluntslide, the snowboarder is backing downhill."
+    description: "A slide performed where the rider\'s trailing foot passes over the rail on approach, with their snowboard traveling perpendicular and leading foot directly above the rail or other obstacle (like a noseslide). When performing a frontside bluntslide, the snowboarder is facing uphill. When performing a backside bluntslide, the snowboarder is backing downhill."
     group: 'grabs'
     trickImages:
       - 'noseblunt.jpg'
