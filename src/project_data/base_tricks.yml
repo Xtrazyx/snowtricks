@@ -1,0 +1,21 @@
+trick1:
+    name: 'Test'
+    description: 'Figure de test'
+    group: 'grabs'
+    trickImages:
+      path1: 'method.jpg'
+      path2: 'frontside_540_indy.jpg'
+    videos:
+      sourceId1: 'x63h54u'
+      sourceId2: 'JEOqqq-A5XM'
+
+trick2:
+    name: 'Test2'
+    description: 'Figure de test2'
+    group: 'grabs'
+    trickImages:
+      path1: 'noseblunt.jpg'
+      path2: 'noseblunt2.jpg'
+    videos:
+      sourceId1: 'x63h54u'
+      sourceId2: 'JEOqqq-A5XM'

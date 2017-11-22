@@ -34,6 +34,10 @@ class TrickImageManager
         $this->em->flush();
     }
 
+    public function persistOnly(TrickImage $image){
+        $this->em->persist($image);
+    }
+
     // READ
     public function getById($id){
         return $this->repo->find($id);
