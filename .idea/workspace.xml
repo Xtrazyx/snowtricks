@@ -157,7 +157,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="generate_trick_command" />
+        <entry key="$PROJECT_DIR$" value="idea_removed" />
       </map>
     </option>
   </component>
@@ -421,7 +421,7 @@
       <workItem from="1510317236615" duration="9663000" />
       <workItem from="1510574410289" duration="6592000" />
       <workItem from="1510586102056" duration="6220000" />
-      <workItem from="1511309672439" duration="7783000" />
+      <workItem from="1511309672439" duration="8018000" />
     </task>
     <task id="LOCAL-00001" summary="CSS HTML JS Front Implementation">
       <created>1510584186551</created>
@@ -444,17 +444,31 @@
       <option name="project" value="LOCAL" />
       <updated>1511316988528</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary=".idea removed from repository">
+      <created>1511317503507</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1511317503507</updated>
+    </task>
+    <task id="LOCAL-00005" summary=".idea removed from repository">
+      <created>1511317572994</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1511317572994</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46243000" />
+    <option name="totallyTimeSpent" value="46478000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26599148" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26599148" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -485,7 +499,8 @@
     <MESSAGE value="CSS HTML JS Front Implementation" />
     <MESSAGE value="Image lib fondations" />
     <MESSAGE value="Symfony command to initialize base trick data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Symfony command to initialize base trick data" />
+    <MESSAGE value=".idea removed from repository" />
+    <option name="LAST_COMMIT_MESSAGE" value=".idea removed from repository" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
