@@ -36,6 +36,11 @@ class VideoManager
         $this->em->flush();
     }
 
+    public function persistOnly(Video $video)
+    {
+        $this->em->persist($video);
+    }
+
     // READ
     public function getById($id)
     {

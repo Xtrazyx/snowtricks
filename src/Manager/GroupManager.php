@@ -29,4 +29,24 @@ class GroupManager
     {
         return $this->repo->findAll();
     }
+
+    public function getByName($name)
+    {
+        return $this->repo->findOneBy(array(
+            'name' => $name
+        ));
+    }
+
+    // CREATE
+    public function new()
+    {
+        return new Group();
+    }
+
+    // UPDATE
+    public function persist(Group $group)
+    {
+        $this->em->persist($group);
+        $this->em->flush();
+    }
 }
