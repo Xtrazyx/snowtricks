@@ -1,21 +1,90 @@
 trick1:
-    name: 'Test'
-    description: 'Figure de test'
+    name: 'Noseblunt'
+    description: "A slide performed where the rider\'s trailing foot passes over the rail on approach, with their snowboard traveling perpendicular and leading foot directly above the rail or other obstacle (like a noseslide). When performing a frontside bluntslide, the snowboarder is facing uphill. When performing a backside bluntslide, the snowboarder is backing downhill."
     group: 'grabs'
     trickImages:
-      path1: 'method.jpg'
-      path2: 'frontside_540_indy.jpg'
+      - 'noseblunt.jpg'
+      - 'noseblunt2.jpg'
     videos:
-      sourceId1: 'x63h54u'
-      sourceId2: 'JEOqqq-A5XM'
+      - 'e2hqg9dqv2Q'
 
 trick2:
-    name: 'Test2'
-    description: 'Figure de test2'
-    group: 'grabs'
+    name: 'Method'
+    description: "You’ll need a kicker for this, as ollie-methods are virtually impossible. The more air you get the easier – and better – this trick is going to be. Look for a decent-sized jump with a fairly steep take off, and if possible, one with a slight tilt so you’re already heading in a backside (i.e. toeside) direction – a backside hip is absolutely perfect. Approach the jump on a flat base, keeping nice and low. As you leave the kicker, spring up and pull your knees towards your body, and at the same time lift your board up to the side – this will make it easier to reach down to grab your heel edge."
+    group: 'rotations'
     trickImages:
-      path1: 'noseblunt.jpg'
-      path2: 'noseblunt2.jpg'
+      - 'method.jpg'
     videos:
-      sourceId1: 'x63h54u'
-      sourceId2: 'JEOqqq-A5XM'
+      - '_hxLS2ErMiY'
+
+trick3:
+    name: 'Front 180°'
+    description: "Cette figure célèbre est une des premières que l'on apprend lorsque l'on commence à faire des sauts en rotation."
+    group: 'rotations'
+    trickImages:
+      - 'front_180.jpg'
+    videos:
+      - 'JMS2PGAFMcE'
+
+trick4:
+    name: 'Alley-Oop'
+    description: "Frontside and backside airs are the first tricks you normally learn in a pipe, but before moving onto spins, there’s a further category to understand: ally-oop airs. An ally-oop is one in which you go up the frontside wall and do a backside air (and vice versa). In effect, you’re turning the ‘wrong’ way on the pipe wall – against the direction of travel. They’re a great-feeling trick and nice one to learn as it’s a relatively simple, 180 degree movement. Plus you don’t end up gathering lots of speed – alley-oops are a perfect way to slow things down, making them super stylish to boot."
+    group: 'spins'
+    trickImages:
+      - 'allyoop.jpg'
+    videos:
+      - 'sl65sMSWrpY'
+
+trick5:
+    name: 'Backside lipslide'
+    description: "Often confused with the frontside boardslide the backslide lipslide a.k.a. ‘back lip’ is arguably even more stylish. So what exactly is a lipslide? Well, it basically means your rear foot passes over the rail first, as opposed to a normal boardslide whereby you lead with your front foot. It’s called ‘backside’ because the rail is behind you when you take off. All this makes them a little harder to master, but trust us it is well worth the effort."
+    group: 'slides'
+    trickImages:
+      - 'backside_lipslide.jpg'
+    videos:
+      - 'pwTTTz0G4oA'
+
+trick6:
+    name: 'Backside 720°'
+    description: "Of the four directions to spin, switch backside is by far the hardest and most daunting. Torstein breaks down a true contest trick all the way to its core. Approach: Drop in switch on a direct line toward the takeoff. About twenty yards from the beginning of the jump, leave that line with your heel edge, taking you to the outside. As you begin to climb, shift back onto your toes, and begin to load up your arms and shoulders for the launch. Takeoff: By going out of the line and then back in, you're setting your takeoff point. Resist pre-spinning as long as possible, waiting until the very top of the lip to snap your front shoulder and head inward. Maneuver: Once you hit the air and begin to spin, reach down for your grab. To not get stalled at 540, dip your head down to your back shoulder after 360. Don't get caught up looking for your landing; continue to look past your back shoulder 'til the very end. Landing: Release your grab after 540 degrees, opening your body to slow down or staying compact if you're coming up a bit short. Stomp the landing on your toes, which always helps your control when coming down switch."
+    group: 'rotations'
+    trickImages:
+      - 'backside_720.jpg'
+    videos:
+      - 'l18w36iI9LU'
+
+trick7:
+    name: 'Frontside 720'
+    description: "Comment faire un Frontside 720 en snowboard. Réagir Comment faire un Frontside 720 en snowboardPublié le 17 mars 2017 à 15:59. Dans la série des Tutoriels de Tonton Franky, on passe au Frontside 720 ou 7.2 Front, comme son nom l’indique une rotation de 2 tours en frontside. Lorsque l’on pense essayer ce tricks, c’est que l’on maitrise déjà très bien le 3.6 et le 5.4 front, n'hésitez pas à aller réviser ces classiques dans les tutos précédents. Le Frontside 7, comment ça marche : 1 - La phase d’approche consiste à arriver bien fléchi sur le kicker, la planche bien à plat, les épaules dans l’axe de la board, le regard fixé sur le bout du kicker.  2 - L'impulsion se fait à 2 pieds au bout du kicker. Ne pas pousser trop fort aux premiers essais au risque d’être déséquilibré. Donc impulsion à 2 pieds, en lançant la rotation avec les épaules comme un 5.4 front (voir le tuto) mais il faut les lancer plus vite et donc plus fort, à affiner selon la taille du saut. Pour un Frontside 720, on peut avoir une impulsion bien à plat, en appui léger sur les talons ou encore en appuie pointe de pieds, suivant le style qu'on veut donner à son tricks et surtout suivant comme on se sent le plus à l’aise de faire. Mais surtout il ne faut déraper le moins possible sur le kicker pour ne pas perdre d’élan, en particulier sur une table de park. 3 - Pour que la rotation se fasse bien à plat il faut lancer le mouvement avec les épaules à l’horizontale et la tête qui va vers l’épaule avant. Pour désaxer, c’est la tête qui va chercher à twister le mouvement et les épaules ne seront plus à l’horizontale."
+    group: 'spins'
+    trickImages:
+      - 'frontside_720.jpg'
+    videos:
+      - 'XkkUSEz3I00'
+
+trick8:
+    name: 'Wall ride'
+    description: "Hitting your first wallride is potentially daunting. The secret – like rails – is to forget all you know about using your edge. Instead, remember that you’ll only be using your flat base, and that success for all wallrides rests on your body position, so commit to getting these two things right and you’ll be fine"
+    group: 'stalls'
+    trickImages:
+      - 'wall_ride.jpg'
+    videos:
+      - 'FIREEjfzw7w'
+
+trick9:
+    name: 'Frontside 540° Indy'
+    description: "The frontside 540 is a pretty advanced trick for most snowboarders, but broken down into composite parts it is achievable. If you’ve got frontside 360s down, and you’re happy to throw a frontside 180 off most bumps and jumps, then you’ve got the skills to land your first 540. The key points to remember are: aim to be halfway around the trick when you get to the top of your air, and keep looking around under your shoulder until you see the landing."
+    group: 'rotations'
+    trickImages:
+      - 'frontside_540_indy.jpg'
+    videos:
+      - 'gW1oSVYoCns'
+
+trick10:
+    name: 'Cab 180°'
+    description: "o a backside or frontside 180 and you’re going to land travelling backwards, so how do you revert to riding normal again? Easy – you’re going to learn how to do a ‘cab’ 180 ollie (sometimes referred to as a ‘half cab’). The term ‘cab’ comes from legendary skateboarder Steve Caballero, and just means switch frontside. This is another classic trick, and an essential link if you’re going to learn further spins such as the cab 360 or cab 5. The halfcab is also perfect for throwing off cliff drops, or if you’re trying butter tricks on the piste and end up riding switch. In fact, anytime you ride backwards and want to revert to riding normal again, you’ll need to throw one. Let’s get it dialled."
+    group: 'spins'
+    trickImages:
+      - 'cab_180.jpg'
+    videos:
+      - '6vLt3NseL_M'
