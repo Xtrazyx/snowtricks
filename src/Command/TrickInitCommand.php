@@ -54,7 +54,18 @@ class TrickInitCommand extends ContainerAwareCommand
         $upload_dir = $this->getContainer()->get('kernel')->getRootDir() . '/../public/' . FileUploader::ASSET_PATH;
 
         // Definition file parsing
-        $tricks = Yaml::parse(file_get_contents( $data_project_dir . 'base_tricks.yml'));
+        $tricks = Yaml::parse(file_get_contents($data_project_dir . 'base_tricks.yml'));
+        $groups = Yaml::parse(file_get_contents($data_project_dir . 'base_groups.yml'));
+
+        // Creating Groups
+        foreach ($groups as $groupName){
+            if(!$this->groupManager->getByName($groupName))
+            {
+                $group = $this->groupManager->new();
+                $group->setName($groupName);
+                $this->groupManager->persist($group);
+            }
+        }
 
         foreach ($tricks as $trick_data)
         {
@@ -65,7 +76,7 @@ class TrickInitCommand extends ContainerAwareCommand
             $trick->setGroup($this->groupManager->getByName($trick_data['group']));
 
             // Creating base images
-            foreach ($trick_data['trickImages'] as $key => $image_data)
+            foreach ($trick_data['trickImages'] as $image_data)
             {
                 $image = $this->imageManager->new();
 
