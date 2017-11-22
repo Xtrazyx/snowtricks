@@ -1,0 +1,47 @@
+@media screen and (max-width: 860px){
+    .username{
+        font-size: 80%;
+    }
+
+    header{
+        display: block;
+        padding: 20px;
+        height: auto;
+        text-align: center;
+    }
+
+    .logo{
+        margin: auto;
+        display: block;
+        position: relative;
+        top: auto;
+        left: auto;
+    }
+
+    menu{
+        padding: 5px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .user-module img {
+        height: 30px;
+        width: 30px;
+        margin-top: 5px;
+        border-radius: 100%;
+        border: solid 1px lightgrey;
+    }
+
+    .username{
+        font-size: 65%;
+    }
+}
+
+@media screen and (max-width: 410px){
+    .trick-item{
+        min-width: 100%;
+    }
+}
