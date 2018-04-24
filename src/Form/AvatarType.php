@@ -21,13 +21,14 @@ class AvatarType extends AbstractType
     {
         $builder
             ->add('fileName', FileType::class, array(
-                'label' => 'Choisissez une image carrée. 150*150px maximum.',
+                'label' => 'Champ facultatif. Choisissez une image carrée. 150*150px maximum.',
                 'constraints' => new Image(array(
                     'maxWidth' => 150,
                     'maxHeight' => 150,
                     'allowLandscape' => false,
                     'allowPortrait' => false
-                ))
+                )),
+                'empty_data' => 'uploads/default_avatar.jpg'
             ))
         ;
     }

@@ -22,6 +22,13 @@ class Avatar extends Image
      */
     protected $id;
 
+    public function __construct()
+    {
+        $this->setAlt('default avatar');
+        $this->setFilename('default_avatar.jpg');
+        $this->setUrl('uploads/default_avatar.jpg');
+    }
+
     /**
      * @return int
      * @codeCoverageIgnore
@@ -30,4 +37,5 @@ class Avatar extends Image
     {
         return $this->id;
     }
+
 }
