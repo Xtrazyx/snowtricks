@@ -30,7 +30,10 @@ class RegisterType extends AbstractType
                 'first_options' => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Répéter le mot de passe')
                 ))
-            ->add('avatar', AvatarType::class, array('label' => '' ))
+            ->add('avatar', AvatarType::class, array(
+                'label' => '',
+                'required' => false
+                ))
         ;
     }
 
