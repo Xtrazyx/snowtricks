@@ -1,3 +1,6 @@
+# Open Classrooms Study Project
+the dependencies are not up to date and may be subject to security problems
+
 # snowtricks
 A community site for snow tricks lovers and learners
 
